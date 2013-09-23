@@ -1,7 +1,7 @@
 <?php
 class SensorDataRule 
 {
-	private $duration;
+	private $duration; 
 	private $definition;
 	
 	private $ruleID; //unique
