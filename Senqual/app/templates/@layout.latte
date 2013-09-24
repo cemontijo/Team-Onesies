@@ -1,0 +1,222 @@
+{**
+ * My Application layout template.
+ *
+ * @param string   $basePath web base path
+ * @param string   $robots   tell robots how to index the content of a page (optional)
+ * @param array    $flashes  flash messages
+test
+ *}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="https://www.utep.edu/images/utep.ico" type="image/x-icon" />
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="robots" content="{$robots}" n:ifset="$robots">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- The styles -->
+    <link id="bs-css" href="{$basePath}/css/bootstrap-iacuc.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+
+    <link href="{$basePath}/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="{$basePath}/css/charisma-app.css" rel="stylesheet">
+    <link href="{$basePath}/css/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+    <link href='{$basePath}/css/fullcalendar.css' rel='stylesheet'>
+    <link href='{$basePath}/css/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='{$basePath}/css/chosen.css' rel='stylesheet'>
+    <link href='{$basePath}/css/uniform.default.css' rel='stylesheet'>
+    <link href='{$basePath}/css/colorbox.css' rel='stylesheet'>
+    <link href='{$basePath}/css/jquery.cleditor.css' rel='stylesheet'>
+    <link href='{$basePath}/css/jquery.noty.css' rel='stylesheet'>
+    <link href='{$basePath}/css/noty_theme_default.css' rel='stylesheet'>
+    <link href='{$basePath}/css/elfinder.min.css' rel='stylesheet'>
+    <link href='{$basePath}/css/elfinder.theme.css' rel='stylesheet'>
+    <link href='{$basePath}/css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href="{$basePath}/css/jquerytour.css" rel="stylesheet">
+    <link href='{$basePath}/css/opa-icons.css' rel='stylesheet'>
+    <link href='{$basePath}/css/ColVis.css' rel='stylesheet'>
+    <link href='{$basePath}/css/main.css' rel='stylesheet'>
+
+        <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <title>{block title|striptags|upper}SenQual{/block}</title>
+
+    <!--<link rel="shortcut icon" href="{$basePath}/favicon.ico"> -->
+	{block head}{/block}
+  </head>
+
+  <body>
+
+    <div id="blocker">
+      &nbsp;
+    </div>
+    <div id="blocker-text">Loading...</div>
+    <script n:syntax="off">
+      var blocker = document.getElementById("blocker")
+      , blockerText = document.getElementById("blocker-text")
+      , blockerTimeout = setTimeout(function () {
+        blocker.style.display = blockerText.style.display = 'block';
+      }, 150);
+    </script>
+
+    <script> document.body.className+=' js' </script>
+
+
+	<!-- topbar starts -->
+    <div class="navbar">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.nav-collapse.collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="{$basePath}"> <img alt="UTEP Logo" src="{$basePath}/img/utep-logo-40.png" /> <span>SenQual</span></a>
+				
+				<!-- user dropdown starts -->
+				<div class="btn-group pull-right">
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<!--<li class="divider"></li>-->
+						<li><a n:href="Login:logout">Logout</a></li>
+					</ul>
+				</div>
+				<!-- user dropdown ends -->
+	
+				
+			</div>
+			
+				<span class="container">
+
+					<div class="nav-collapse collapse menu">
+						<ul class="nav">
+							<li class=""><a href="#">Home</a></li>
+							<li class=""><a href="#">Dashboard</a></li>
+							<li class=""><a href="#">Monitor</a></li>
+							<li class=""><a href="#">Rules</a></li>
+							<li class=""><a href="#">Sensors</a></li>
+							<li class=""><a href="#">Profile</a></li>
+						</ul>
+					</div>
+				</span>
+			
+		</div>
+    </div>
+	
+	
+    <!-- topbar ends -->
+	
+	<!-- content starts -->
+	<div id="content">
+	{include #content}
+	</div>
+	<!-- content ends -->
+
+	{block scripts}
+    <script src="{$basePath}/js/jquery-1.8.3.js"></script>
+    <script src="{$basePath}/js/netteForms.js"></script>
+
+<!-- external javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+        <!-- jQuery UI -->
+    <script src="{$basePath}/js/jquery-ui-1.9.2.custom.js"></script>
+    <!-- transition / effect library -->
+    <script src="{$basePath}/js/bootstrap-transition.js"></script>
+    <!-- alert enhancer library -->
+    <script src="{$basePath}/js/bootstrap-alert.js"></script>
+    <!-- modal / dialog library -->
+    <script src="{$basePath}/js/bootstrap-modal.js"></script>
+    <!-- custom dropdown library -->
+    <script src="{$basePath}/js/bootstrap-dropdown.js"></script>
+    <!-- scrolspy library -->
+    <script src="{$basePath}/js/bootstrap-scrollspy.js"></script>
+    <!-- library for creating tabs -->
+    <script src="{$basePath}/js/bootstrap-tab.js"></script>
+    <!-- library for advanced tooltip -->
+    <script src="{$basePath}/js/bootstrap-tooltip.js"></script>
+    <!-- popover effect library -->
+    <script src="{$basePath}/js/bootstrap-popover.js"></script>
+    <!-- button enhancer library -->
+    <script src="{$basePath}/js/bootstrap-button.js"></script>
+    <!-- accordion library (optional, not used in demo) -->
+    <script src="{$basePath}/js/bootstrap-collapse.js"></script>
+    <!-- carousel slideshow library (optional, not used in demo) -->
+    <script src="{$basePath}/js/bootstrap-carousel.js"></script>
+    <!-- autocomplete library -->
+    <script src="{$basePath}/js/bootstrap-typeahead.js"></script>
+    <!-- tour library -->
+    <script src="{$basePath}/js/bootstrap-tour.js"></script>
+    <!-- library for cookie management -->
+    <script src="{$basePath}/js/jquery.cookie.js"></script>
+    <!-- calander plugin -->
+    <script src='{$basePath}/js/fullcalendar.min.js'></script>
+    <!-- data table plugin -->
+    <script src='{$basePath}/js/jquery.dataTables.min.js'></script>
+    <script src='{$basePath}/js/ColVis.js'></script>
+
+        <!-- chart libraries start -->
+    <script src="{$basePath}/js/excanvas.js"></script>
+    <script src="{$basePath}/js/jquery.flot.min.js"></script>
+    <script src="{$basePath}/js/jquery.flot.pie.min.js"></script>
+    <script src="{$basePath}/js/jquery.flot.stack.js"></script>
+    <script src="{$basePath}/js/jquery.flot.resize.min.js"></script>
+    <!-- chart libraries end -->
+
+        <!-- select or dropdown enhancer -->
+    <script src="{$basePath}/js/jquery.chosen.min.js"></script>
+    <!-- checkbox, radio, and file input styler -->
+    <script src="{$basePath}/js/jquery.uniform.min.js"></script>
+    <!-- plugin for gallery image view -->
+    <script src="{$basePath}/js/jquery.colorbox.min.js"></script>
+    <!-- rich text editor library -->
+    <script src="{$basePath}/js/jquery.cleditor.min.js"></script>
+    <!-- notification plugin -->
+    <script src="{$basePath}/js/jquery.noty.js"></script>
+    <!-- file manager library -->
+    <script src="{$basePath}/js/jquery.elfinder.min.js"></script>
+    <!-- star rating plugin -->
+    <script src="{$basePath}/js/jquery.raty.min.js"></script>
+    <!-- for iOS style toggle switch -->
+    <script src="{$basePath}/js/jquery.iphone.toggle.js"></script>
+    <!-- autogrowing textarea plugin -->
+    <script src="{$basePath}/js/jquery.autogrow-textarea.js"></script>
+    <!-- multiple file upload plugin -->
+    <script src="{$basePath}/js/jquery.uploadify-3.1.min.js"></script>
+    <!-- history.js for cross-browser state change on ajax -->
+    <script src="{$basePath}/js/jquery.history.js"></script>
+    <!-- application script for Charisma demo -->
+    <script src="{$basePath}/js/charisma.js"></script>
+
+    <script src="{$basePath}/js/iacuc/iacuc.js"></script>
+    <script src="{$basePath}/js/iacuc/plainTool.js"></script>
+    <script src="{$basePath}/js/iacuc/textInput.js"></script>
+    <script src="{$basePath}/js/iacuc/datepicker.js"></script>
+    <script src="{$basePath}/js/iacuc/datepickerPersonCourse.js"></script>
+    <script src="{$basePath}/js/iacuc/select.js"></script>
+    <script src="{$basePath}/js/iacuc/multipleSelect.js"></script>
+    <script src="{$basePath}/js/iacuc/multipleSelectPersonProtocol.js"></script>
+    <script src="{$basePath}/js/iacuc/personName.js"></script>
+    <script src="{$basePath}/js/iacuc/toggle.js"></script>
+    <script src="{$basePath}/js/iacuc/typeahead.js"></script>
+
+
+	{/block}
+    <img class="ajaxloader" src="{$basePath}/img/ajax-loaders/ajax-loader-1.gif" style="display:none">
+  </body>
+</html>

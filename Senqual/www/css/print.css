@@ -1,0 +1,15 @@
+/*red*/
+.label-important {color: red; font-weight: bold; }
+
+/*orange*/
+.label-warning {color: orange; font-weight: bold; font-style: italic; }
+
+/*green*/
+.label-success {color: green; }
+
+table {border-collapse: collapse}
+th, td {border: 1px solid black; padding: 1px 2px 1px 2px; text-align: center;  }
+th {font-size: 60%; }
+label {font-size: 75%; }
+
+.nowrap { white-space:nowrap; }
