@@ -16,6 +16,19 @@ class SensorDataRule
 		$this->playlistName = $pName;
 		$this->playlist = array();
 	}
+	
+	public function load($id){
+		$ruleRow = $database->tables('rules').select($id);
+		$scope_class = $ruleRow('scope_class');
+		$scope_statement1 = $ruleRow('scope_statement1');
+		$scope_class = $ruleRow('scope_class');
+		$scope_class = $ruleRow('scope_class');
+		$scope_class = $ruleRow('scope_class');
+		$scope_class = $ruleRow('scope_class');
+		$scope_class = $ruleRow('scope_class');
+		$scope_class = $ruleRow('scope_class');
+		$scope_class = $ruleRow('scope_class');
+	}
 
 	public function setDuration($nuDuration)
 	{
