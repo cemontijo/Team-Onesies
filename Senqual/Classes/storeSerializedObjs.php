@@ -8,8 +8,8 @@ $stmt = odbc_prepare($conn, "UPDATE sessions SET data = ? WHERE id = ?");
 $sqldata = array (serialize($session_data), $_SERVER['PHP_AUTH_USER']);
 
 if (!odbc_execute($stmt, $sqldata)) {
-    $stmt = odbc_prepare($conn,
-     "INSERT INTO sessions (id, data) VALUES(?, ?)");
+    $stmt = odbc_prepare($conn,"INSERT INTO sessions (id, data) VALUES(?, ?)");
+     
     if (!odbc_execute($stmt, $sqldata)) {
         /* Something went wrong.. */
     }
