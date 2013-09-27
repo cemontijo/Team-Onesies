@@ -9,14 +9,22 @@
 {block content}
 
 
+<!-- SELECT RULE -->
 <div class="row-fluid">
-	<div class="box span12">		
+	<div class="box span12">
+		<div class="box-header well">
+			<h2><i class="icon-info-sign"></i> Select Rule</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>	
 		<div class="box-content">
 			<table class="table">	
 				<thead>
 					<tr>						
-						<th class="center">New Rule</th>
-						<th class="">Exisiting Rule</th>
+						<th>New Rule</th>
+						<th>Exisiting Rule</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -28,6 +36,7 @@
 								<option value="1">Rule ID 1</option>
 								<option value="2">Rule ID 2</option>
 								<option value="3">Rule ID 3</option>
+							</select>
 						</td>
 					</tr>
 				</tbody>
@@ -37,37 +46,280 @@
 	</div>
 </div>
 
-<div class="row-fluid">	
-	<div class="box span12">
+
+<!-- OVERVIEW -->
+<div class="row-fluid">
+	<div class="box span12">		
 		<div class="box-header well">
-			<h2><i class="icon-info-sign"></i></h2>
+			<h2><i class="icon-info-sign"></i> Overview</h2>
 			<div class="box-icon">
 				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
 				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
 			</div>
 		</div>
 		<div class="box-content">
-
-			<table class="table table-striped datatable">	
+			<table class="table">
 				<thead>
 					<tr>
-						<th>Person Name</th>
-						<th>Course</th>
-						<th>Days</th>
+						<th>Natural Language Description</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td><input type="text" class="span12"></td>
+					</tr>
+				</tbody>
+			</table>
+			<hr>
+			<table class="table">	
+				<thead>
+					<tr>						
+						<th>Rule Duration</th>
+						<th>Rule Definition</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<select size="1">
+								<option value="0" selected="selected">Select a Duration</option>
+								<option value="1">All readings</option>
+								<option value="2">All Readings After L</option>
+								<option value="2">All Readings Before R</option>
+								<option value="2">All Readings Between L and R</option>
+							</select>
+						</td>
+						<td>
+							<select size="1">
+								<option value="0" selected="selected">Select Rule Definition</option>
+								<option value="1">Universality</option>
+								<option value="2">Absence</option>
+								<option value="2">Existence</option>
+								<option value="2">Response</option>
+							</select>
+						</td>
+					</tr>
+				</tbody>
+			</table> 		
+		</div>
+	</div>
+</div>
+
+<!-- BOUNDARIES -->
+<div class="row-fluid">	
+
+	<!-- LEFT BOUNDARY -->
+	<div class="box span6">
+		<div class="box-header well">
+			<h2><i class="icon-info-sign"></i> Left Boundary</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		<div class="box-content">
+			<select size="1">
+				<option value="0" selected="selected">Select Sensor</option>
+				<option value="1">Registered Sensor 1</option>
+				<option value="1">Registered Sensor 2</option>
+				<option value="1">Registered Sensor 3</option>
+			</select>
+			<table class="table table-bordered">	
+				<tbody>
+					<tr>
+						<td>Field 1</td>
+						<td>Field 2</td>
+						<td>Field 3</td>
+						<td>Field 4</td>
 					</tr>
 				</tbody>
 			</table> 
+			<span>
+				<button type="button" class="btn btn span1">=</button>
+				<button type="button" class="btn span1">!=</button>
+				<button type="button" class="btn span1"><</button>
+				<button type="button" class="btn span1">></button>
+				<button type="button" class="btn span1">>=</button>
+				<button type="button" class="btn span1"><=</button>
+				<button type="button" class="btn span2">OR</button>
+				<button type="button" class="btn span2">AND</button>
+				<button type="button" class="btn span2">NOT</button>
+			</span>
+			<div class="clearfix"></div>
+			<br />
+			<span>Left Boundary Sub-formula</span>
+			<div>
+				<input type="text" class="span12">
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	
+	<!-- RIGHT BOUNDARY -->
+	<div class="box span6">
+		<div class="box-header well">
+			<h2><i class="icon-info-sign"></i> Right Boundary</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		<div class="box-content">
+			<select size="1">
+				<option value="0" selected="selected">Select Sensor</option>
+				<option value="1">Registered Sensor 1</option>
+				<option value="1">Registered Sensor 2</option>
+				<option value="1">Registered Sensor 3</option>
+			</select>
+			
+			<div class="clearfix"></div>
+
+			<table class="table table-bordered">	
+				<tbody>
+					<tr>
+						<td>Field 1</td>
+						<td>Field 2</td>
+						<td>Field 3</td>
+						<td>Field 4</td>
+					</tr>
+				</tbody>
+			</table> 
+			<span>
+				<button type="button" class="btn btn span1">=</button>
+				<button type="button" class="btn span1">!=</button>
+				<button type="button" class="btn span1"><</button>
+				<button type="button" class="btn span1">></button>
+				<button type="button" class="btn span1">>=</button>
+				<button type="button" class="btn span1"><=</button>
+				<button type="button" class="btn span2">OR</button>
+				<button type="button" class="btn span2">AND</button>
+				<button type="button" class="btn span2">NOT</button>
+			</span>
+			<div class="clearfix"></div>
+			<br />
+			<span>Right Boundary Sub-formula</span>
+			<div>
+				<input type="text" class="span12">
+			</div>
 			<div class="clearfix"></div>
 		</div>
 	</div>
 </div>
 
+<!-- PREMISE AND BOOLEAN STATEMENT -->
+<div class="row-fluid">	
+	<!-- PREMISE -->
+	<div class="box span6">
+		<div class="box-header well">
+			<h2><i class="icon-info-sign"></i> Premise</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		<div class="box-content">
+			<select size="1">
+				<option value="0" selected="selected">Select Sensor</option>
+				<option value="1">Registered Sensor 1</option>
+				<option value="1">Registered Sensor 2</option>
+				<option value="1">Registered Sensor 3</option>
+			</select>
+			
+			<div class="clearfix"></div>
+
+			<table class="table table-bordered">	
+				<tbody>
+					<tr>
+						<td>Field 1</td>
+						<td>Field 2</td>
+						<td>Field 3</td>
+						<td>Field 4</td>
+					</tr>
+				</tbody>
+			</table> 
+			<span>
+				<button type="button" class="btn btn span1">=</button>
+				<button type="button" class="btn span1">!=</button>
+				<button type="button" class="btn span1"><</button>
+				<button type="button" class="btn span1">></button>
+				<button type="button" class="btn span1">>=</button>
+				<button type="button" class="btn span1"><=</button>
+				<button type="button" class="btn span2">OR</button>
+				<button type="button" class="btn span2">AND</button>
+				<button type="button" class="btn span2">NOT</button>
+			</span>
+			<div class="clearfix"></div>
+			<br />
+			<span>Premise Sub-formula</span>
+			<div>
+				<input type="text" class="span12">
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	
+	<!-- BOOLEAN STATEMENT -->
+	<div class="box span6">
+		<div class="box-header well">
+			<h2><i class="icon-info-sign"></i> Boolean Statement</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		<div class="box-content">
+			<select size="1">
+				<option value="0" selected="selected">Select Sensor</option>
+				<option value="1">Registered Sensor 1</option>
+				<option value="1">Registered Sensor 2</option>
+				<option value="1">Registered Sensor 3</option>
+			</select>
+			
+			<div class="clearfix"></div>
+
+			<table class="table table-bordered">	
+				<tbody>
+					<tr>
+						<td>Field 1</td>
+						<td>Field 2</td>
+						<td>Field 3</td>
+						<td>Field 4</td>
+					</tr>
+				</tbody>
+			</table> 
+			<span>
+				<button type="button" class="btn btn span1">=</button>
+				<button type="button" class="btn span1">!=</button>
+				<button type="button" class="btn span1"><</button>
+				<button type="button" class="btn span1">></button>
+				<button type="button" class="btn span1">>=</button>
+				<button type="button" class="btn span1"><=</button>
+				<button type="button" class="btn span2">OR</button>
+				<button type="button" class="btn span2">AND</button>
+				<button type="button" class="btn span2">NOT</button>
+			</span>
+			<div class="clearfix"></div>
+			<br />
+			<span>Boolean Statement Sub-formula</span>
+			<div>
+				<input type="text" class="span12">
+			</div>
+		</div>
+	</div>
+</div>
+
+<br />
+<!-- Radiobutton and Submit -->
+<div class="row-fluid">	
+	<div class="pagination-centered">
+		<label class="radio">
+			<input class="input-large" type="radio" value="">Share the rule
+		</label> <br /><br />
+		<div>
+			<button type="submit" class="btn btn-primary btn-group btn-large pull-center">Submit</button>
+			<button type="button" class="btn btn-large btn-group pull-center">Clear</button>
+		</div>
+	</div>
+</div>
 
 {/block}
