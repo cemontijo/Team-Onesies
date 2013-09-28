@@ -15,7 +15,7 @@ class ProfilePresenter extends BasePresenter
 
 	public function renderDefault()
 	{
-		$this->template->monitors = $this->database->table('monitors');
+		$this->template->users = $this->database->table('user_profile');
 	}
 
 }
