@@ -11,13 +11,24 @@
 	      </span>
 	    </div><!-- /input-group -->
 	    <div class="list-group">
-		  <a href="#" class="list-group-item active">
-		    Rule #1
+	      {var $i=0}
+		  {foreach $rules as $rule}
+		  {if ($i==$selectedRuleIndex)}
+		  <a n:href="Monitor:?selectedRuleIndex=$i" class="list-group-item active">
+		    {$rule->id}
 		  </a>
+<<<<<<< HEAD
 		  <a href="#" id="2" class="list-group-item" onClick="selectedRule(1)">Rule #2</a>
 		  <a href="#" id="3" class="list-group-item" >Rule #3</a>
 		  <a href="#" id="4" class="list-group-item">Rule #4</a>
 		  <a href="#" id="5" class="list-group-item">Rule #5</a>
+=======
+		  {else}
+		  <a n:href="Monitor:?selectedRuleIndex=$i" class="list-group-item">{$rule->id}</a>
+		  {/if}
+		  <?php $i++ ?>
+		  {/foreach}
+>>>>>>> origin/achim
 		</div>
 	    <button type="button" class="btn btn-default" style="width:100%;" action="addRule?rule=" >
 	    	Add Rule&gt;&gt;

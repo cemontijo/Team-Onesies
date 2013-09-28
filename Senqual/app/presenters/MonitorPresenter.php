@@ -13,9 +13,15 @@ class MonitorPresenter extends BasePresenter
 		$this->database = $database;
 	}
 	
+	public function actionSelectRule($id)
+	{
+		$this->template->selectedRuleIndex = $id;
+		$this->redirect('Monitor:');
+	}
 	
 	public function renderDefault()
 	{
+		if ( !$this->getUser()->isLoggedIn() ) $this->redirect('Login:in');
 		$monitors = $this->database->table('monitors');
 		if (!$monitors) {
 			$this->error('No monitors found');
@@ -27,6 +33,8 @@ class MonitorPresenter extends BasePresenter
 		}
 		$this->template->monitors = $monitors;
 		$this->template->rules = $rules;
+		
+		if (!isset($this->template->selectedRuleIndex) ) $this->template->selectedRuleIndex = -1;
 	}
 
 }
