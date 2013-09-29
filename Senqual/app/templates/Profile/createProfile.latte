@@ -1,0 +1,55 @@
+{block content}
+<h3>Create Profile</h3>
+<form action ="ProfilePresenter.php" class = "form-horizonal" method = "post">
+	<div
+	<label>Name</label>
+	</div>
+	<input type="required" id = name class="form-control" placeholder="Name" required >
+	<div
+    <label>Title</label>
+	</div>	      
+	<input type="text" id = title class="form-control" placeholder="Title" required>
+	<div
+	<label>Affiliation</label>
+	</div>
+	<input type="text" id = affiliation class="form-control" placeholder="Affiliation" required>
+	<div
+	<label>Email</label>
+	</div>	      
+	<input type="text" id = email class="form-control" placeholder="E-mail" required>
+	<div
+	<label>Password</label>
+    </div>	      
+	<input type="password" id = password class="form-control" placeholder="Password" required>
+	<div
+    <label>Confirm Password</label>
+    </div>	      
+	<input type="password" class="form-control" placeholder="Confirm Password" required>
+	<div
+	<label>Phone Number</label>
+	</div>	     
+ 	<input type="text" id = phone class="form-control" placeholder="Phone Number" >
+	<div
+	<span class="help-block">Select how you would like to be notified when an anomaly is detected.</span>
+    </div>
+	<div
+    <label class="checkbox1">
+    <input type="checkbox" name="optionNotifications" id="optionNotifications1" value="option1" > E-mail
+	<label class="checkbox1">
+	<input type="checkbox" name="optionNotifications" id="optionNotifications2" value="option2" > Text
+	<label class="checkbox1">
+    <input type="checkbox" name="optionNotifications" id="optionNotifications3" value="option3" > No Notification
+	</div>
+	<div
+	<span class="help-block">Select the frequency of notification.</span>
+    </div>
+	<div
+    <label class="checkbox2">
+    <input type="checkbox"name="optionNotifications" id="optionFrequency1" value="option1" > Each anomaly detected,
+	<label class="checkbox2">
+	<input type="checkbox"name="optionNotifications" id="optionFrequency2" value="option2"> Once for each rule violated.
+	<label class="checkbox2">
+	<input type="checkbox"name="optionNotifications" id="optionFrequency3" value="option3"> Once.
+	</div>
+	<button type = "submit" class="form-horizontal"> Create Profile</button>
+</form>
