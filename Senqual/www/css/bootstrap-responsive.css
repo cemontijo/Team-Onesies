@@ -969,3 +969,16 @@ a.list-group-item:focus {
   margin-bottom: 0;
   line-height: 1.3;
 }
+
+#monitorsBox .panel.panel-default .panel-heading {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #eeeeff;
+  border: 1px solid #eeeeee;
+}
+
+#monitorsBox .panel.panel-default.active > .panel-heading {
+  background-color: #ccccff;
+}

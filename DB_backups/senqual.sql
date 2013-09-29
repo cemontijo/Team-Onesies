@@ -29,7 +29,7 @@ USE `senqual`;
 --
 
 CREATE TABLE IF NOT EXISTS `monitors` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
@@ -49,8 +49,8 @@ INSERT INTO `monitors` (`id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `monitor_rules` (
-  `monitor_id` int(11) NOT NULL,
-  `rule_id` varchar(255) NOT NULL,
+  `monitor_id` int NOT NULL,
+  `rule_id` int NOT NULL,
   PRIMARY KEY (`monitor_id`,`rule_id`),
   KEY `rule_id` (`rule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `monitor_rules` (
 --
 
 INSERT INTO `monitor_rules` (`monitor_id`, `rule_id`) VALUES
-(1, 'rule1');
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,7 @@ INSERT INTO `monitor_rules` (`monitor_id`, `rule_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `rules` (
-  `id` varchar(255) NOT NULL,
+  `id` int NOT NULL,
   `dnl` text NOT NULL,
   `rule_string` text NOT NULL,
   `created_by` varchar(255) NOT NULL,
@@ -83,8 +83,8 @@ CREATE TABLE IF NOT EXISTS `rules` (
 --
 
 INSERT INTO `rules` (`id`, `dnl`, `rule_string`, `created_by`, `modified_at`, `created_at`) VALUES
-('rule1', 'Testdnl1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquam leo lectus, eget placerat risus vehicula sit amet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus cursus elit nec magna commodo varius. Nam tincidunt nunc scelerisque mi tincidunt facilisis. Donec ullamcorper quam id quam sodales sollicitudin. Fusce quis leo sit amet dui tempor viverra. Fusce molestie erat quis turpis elementum accumsan. Proin ut eleifend mi. Fusce sollicitudin ante orci, in fringilla lorem malesuada nec. Sed quis lectus in enim elementum consectetur.', 'aschweighofer@miners.utep.edu', '2013-09-25 23:17:19', '2013-09-25 23:16:03'),
-('rule2', 'TestDnl2', 't amet dui tempor viverra. Fusce molestie erat quis turpis elementum accumsan. Proin ut eleifend mi. Fusce sollicitudin ante orci, in fringilla lorem malesuada nec. Sed quis lectus in en', 'newminer@utep.edu', '2013-09-25 23:17:56', '2013-09-25 23:17:56');
+(1, 'Testdnl1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquam leo lectus, eget placerat risus vehicula sit amet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus cursus elit nec magna commodo varius. Nam tincidunt nunc scelerisque mi tincidunt facilisis. Donec ullamcorper quam id quam sodales sollicitudin. Fusce quis leo sit amet dui tempor viverra. Fusce molestie erat quis turpis elementum accumsan. Proin ut eleifend mi. Fusce sollicitudin ante orci, in fringilla lorem malesuada nec. Sed quis lectus in enim elementum consectetur.', 'aschweighofer@miners.utep.edu', '2013-09-25 23:17:19', '2013-09-25 23:16:03'),
+(2, 'TestDnl2', 't amet dui tempor viverra. Fusce molestie erat quis turpis elementum accumsan. Proin ut eleifend mi. Fusce sollicitudin ante orci, in fringilla lorem malesuada nec. Sed quis lectus in en', 'newminer@utep.edu', '2013-09-25 23:17:56', '2013-09-25 23:17:56');
 
 --
 -- Constraints for dumped tables
