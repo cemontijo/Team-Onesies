@@ -1,35 +1,28 @@
 {* Profile Page *}
-
-
 {block content}
-<div class="span4">
-     <h2>Profile</h2>
-<div class="panel-group" id="accordion">
-      {foreach $users as $user}
-	  <div class="panel panel-default">
-	    <div class="panel-heading">
-	      <h4 class="panel-title">
-	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{$user->id}">
-	          
-	        </a>
-	      </h4>
-	    </div>
-	    <div id="collapse{$user->id}" class="panel-collapse collapse in">
-	      <div class="panel-body">
-	      	<div class="list-group">
-			<input type="required" id = name class="form-control" placeholder={$user->name} >
-			<input type="required" id = title class="form-control" placeholder={$user->title} >
-			<input type="required" id = affiliation class="form-control" placeholder={$user->affiliation} >
-			<input type="required" id = email class="form-control" placeholder={$user->email} >
-			<input type="required" id = phone class="form-control" placeholder={$user->phone} >
+
+	<h2>Profile</h2>
+	{foreach $profile as $user}
+		<div class="panel-heading">
+		</div>
+		<div id="collapse{$user->id}">
+			<div class="panel-body">
+			<form class = "form-horizonal" method = "get">
+				<div input class="list-group" type = "text">
+				<input class="list-group-item" id = "name" placeholder = {$user->name} required>
+				<input class="list-group-item" id = "title" placeholder = {$user->title}>
+				<input class="list-group-item" id = "affiliation" placeholder = {$user->affiliation}>
+				<input class="list-group-item" id = "email" placeholder = {$user->email}>
+				<input class="list-group-item" id = "phone" placeholder = {$user->phone}>						
+				<input id="ArchChk" name="ArchChk" type="checkbox" checked>Text Notifications
+				<br>
+                		<input id="NonArchChk" name="NonArchChk" type="checkbox">E-mail Notifications
+                
+				</div>
+				<button type = "submit" class = "form-horizontal" > Save Changes</button>
+			</form>
+		
 			</div>
-	      </div>
-	    </div>
-	 
-	
-	  </div>
-	  {/foreach}
-	</div>
-	
-	
-   </div>
+		</div>	
+	{/foreach}
+{/block content}
