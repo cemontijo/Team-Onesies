@@ -1,11 +1,9 @@
 <?php
 class SensorDataRule 
 {
-	private $duration; 
-	private $definition;
-	
 	private $ruleID; //unique
 	private $creator;
+	private $DNL;
 	private $dateCreated;
 
 	private $scope_class, $scope_statement1, $scope_statement2, $scope_string;
