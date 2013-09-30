@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4.1
+-- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2013 at 02:32 AM
--- Server version: 5.5.32
--- PHP Version: 5.4.19
+-- Generation Time: Sep 30, 2013 at 04:13 AM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.7
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `senqual`
 --
-CREATE DATABASE IF NOT EXISTS `senqual` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `senqual`;
 
 -- --------------------------------------------------------
 
@@ -29,18 +27,19 @@ USE `senqual`;
 --
 
 CREATE TABLE IF NOT EXISTS `monitors` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `monitors`
 --
 
 INSERT INTO `monitors` (`id`, `name`) VALUES
-(1, 'TestMonitor1'),
-(2, 'Test-#+´´ symbols Monitor 2');
+(1, 'TestMonitor13'),
+(2, 'Test-#+´´ symbols Monitor 2'),
+(3, 'jkjk1');
 
 -- --------------------------------------------------------
 
@@ -49,8 +48,8 @@ INSERT INTO `monitors` (`id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `monitor_rules` (
-  `monitor_id` int NOT NULL,
-  `rule_id` int NOT NULL,
+  `monitor_id` int(11) NOT NULL,
+  `rule_id` varchar(255) NOT NULL,
   PRIMARY KEY (`monitor_id`,`rule_id`),
   KEY `rule_id` (`rule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -60,7 +59,10 @@ CREATE TABLE IF NOT EXISTS `monitor_rules` (
 --
 
 INSERT INTO `monitor_rules` (`monitor_id`, `rule_id`) VALUES
-(1, 1);
+(1, 'rule1'),
+(1, 'rule2'),
+(2, 'rule2'),
+(3, 'rule2');
 
 -- --------------------------------------------------------
 
@@ -69,7 +71,7 @@ INSERT INTO `monitor_rules` (`monitor_id`, `rule_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `rules` (
-  `id` int NOT NULL,
+  `id` varchar(255) NOT NULL,
   `dnl` text NOT NULL,
   `rule_string` text NOT NULL,
   `created_by` varchar(255) NOT NULL,
@@ -83,8 +85,31 @@ CREATE TABLE IF NOT EXISTS `rules` (
 --
 
 INSERT INTO `rules` (`id`, `dnl`, `rule_string`, `created_by`, `modified_at`, `created_at`) VALUES
-(1, 'Testdnl1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquam leo lectus, eget placerat risus vehicula sit amet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus cursus elit nec magna commodo varius. Nam tincidunt nunc scelerisque mi tincidunt facilisis. Donec ullamcorper quam id quam sodales sollicitudin. Fusce quis leo sit amet dui tempor viverra. Fusce molestie erat quis turpis elementum accumsan. Proin ut eleifend mi. Fusce sollicitudin ante orci, in fringilla lorem malesuada nec. Sed quis lectus in enim elementum consectetur.', 'aschweighofer@miners.utep.edu', '2013-09-25 23:17:19', '2013-09-25 23:16:03'),
-(2, 'TestDnl2', 't amet dui tempor viverra. Fusce molestie erat quis turpis elementum accumsan. Proin ut eleifend mi. Fusce sollicitudin ante orci, in fringilla lorem malesuada nec. Sed quis lectus in en', 'newminer@utep.edu', '2013-09-25 23:17:56', '2013-09-25 23:17:56');
+('rule1', 'Testdnl1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquam leo lectus, eget placerat risus vehicula sit amet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus cursus elit nec magna commodo varius. Nam tincidunt nunc scelerisque mi tincidunt facilisis. Donec ullamcorper quam id quam sodales sollicitudin. Fusce quis leo sit amet dui tempor viverra. Fusce molestie erat quis turpis elementum accumsan. Proin ut eleifend mi. Fusce sollicitudin ante orci, in fringilla lorem malesuada nec. Sed quis lectus in enim elementum consectetur.', 'aschweighofer@miners.utep.edu', '2013-09-25 23:17:19', '2013-09-25 23:16:03'),
+('rule2', 'TestDnl2', 't amet dui tempor viverra. Fusce molestie erat quis turpis elementum accumsan. Proin ut eleifend mi. Fusce sollicitudin ante orci, in fringilla lorem malesuada nec. Sed quis lectus in en', 'newminer@utep.edu', '2013-09-25 23:17:56', '2013-09-25 23:17:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_profile`
+--
+
+CREATE TABLE IF NOT EXISTS `user_profile` (
+  `email` varchar(255) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `title` varchar(32) NOT NULL,
+  `affiliation` varchar(16) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone` varchar(32) NOT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user_profile`
+--
+
+INSERT INTO `user_profile` (`email`, `name`, `title`, `affiliation`, `password`, `phone`) VALUES
+('test1@utep.edu', 'Hans Mustermann', 'Herr', 'Student', 'aaaa', '+4366666666');
 
 --
 -- Constraints for dumped tables

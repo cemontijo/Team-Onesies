@@ -77,10 +77,10 @@ class ProfilePresenter extends BasePresenter
 	}
 	public function handleUpdateData()
 	{
-		$id = $this->getParam('id');
+		$email = $this->getParam('email');
 		$fields = (array) $this->getParam('user_profile');
 		$tableName = $this->getParam('user_profile');
-		$row = $this->database->update($tableName, $fields, $id);
+		$row = $this->database->update($tableName, $fields, $email);
 		
 		
 		
