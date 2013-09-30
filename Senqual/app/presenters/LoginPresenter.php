@@ -88,6 +88,11 @@ class LoginPresenter extends BasePresenter
 
 		//Stores new profile in DB
 		$this->database->table('user_profile')->insert($arrayValues);
+		$this->database->table('user')->insert(array(
+			'username' => $values['email'],
+			'password' => $values['password'],
+			'role' => 1
+		));
 	}
 	
 	public function signInFormSucceeded($form)

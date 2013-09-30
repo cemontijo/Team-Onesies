@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 4.0.4.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2013 at 04:13 AM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Generation Time: Sep 30, 2013 at 07:21 AM
+-- Server version: 5.5.32
+-- PHP Version: 5.4.19
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `senqual`
 --
+CREATE DATABASE IF NOT EXISTS `senqual` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `senqual`;
 
 -- --------------------------------------------------------
 
@@ -91,25 +93,54 @@ INSERT INTO `rules` (`id`, `dnl`, `rule_string`, `created_by`, `modified_at`, `c
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
+(1, 'hans.mustermann@gmail.com', 'hans', 1),
+(2, 'test', 'abc', 0),
+(4, 'aschweighofer', 'pass', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_profile`
 --
 
 CREATE TABLE IF NOT EXISTS `user_profile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `name` varchar(64) NOT NULL,
   `title` varchar(32) NOT NULL,
   `affiliation` varchar(16) NOT NULL,
   `password` varchar(255) NOT NULL,
   `phone` varchar(32) NOT NULL,
-  PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `user_profile`
 --
 
-INSERT INTO `user_profile` (`email`, `name`, `title`, `affiliation`, `password`, `phone`) VALUES
-('test1@utep.edu', 'Hans Mustermann', 'Herr', 'Student', 'aaaa', '+4366666666');
+INSERT INTO `user_profile` (`id`, `email`, `name`, `title`, `affiliation`, `password`, `phone`) VALUES
+(2, 'lklk', 'lklkl', 'lklk', 'lkl', 'lkklkl', ''),
+(3, 'sdfdsf', 'dsf', 'sdf', '', 'fffff', ''),
+(4, 'hans.mustermann@gmail.com', 'Hans Mustermann', 'Herr', 'Student', 'aaaa', '+4366666666'),
+(5, 'test', 'Administra', 'sdfsdfsdffdssd', 'dsf', 'abc', '00293'),
+(7, 'aschweighofer', 'Achim Schweighofer', 'Bsc.', 'University', 'pass', '02983023983');
 
 --
 -- Constraints for dumped tables
