@@ -1,68 +1,87 @@
 <?php
-class SensorDataRule 
+class SensorDataRule extends GenericDatabase
 {
-	private $ruleID; //unique
-	private $creator;
-	private $DNL;
-	private $dateCreated;
+	//private $ruleID; //unique
+	//private $creator;
+	//private $DNL;
+	//private $dateCreated;
 
-	private $scope_class, $scope_statement1, $scope_statement2, $scope_string;
-	private $pattern_class, $pattern_premise, $pattern_statement, $pattern_string;
+	//private $scope_class, $scope_statement1, $scope_statement2, $scope_string;
+	//private $pattern_class, $pattern_premise, $pattern_statement, $pattern_string;
 
-
-	public function __construct($pName) {
-		$this->playlistName = $pName;
-		$this->playlist = array();
-	}
+	/** @var Nette\Database\Connection */
+	private $database;
 	
-	public function load($id){
-		$ruleRow = $database->tables('rules').select($id);
-		$scope_class = $ruleRow('scope_class');
-		$scope_statement1 = $ruleRow('scope_statement1');
-		$scope_class = $ruleRow('scope_class');
-		$scope_class = $ruleRow('scope_class');
-		$scope_class = $ruleRow('scope_class');
-		$scope_class = $ruleRow('scope_class');
-		$scope_class = $ruleRow('scope_class');
-		$scope_class = $ruleRow('scope_class');
-		$scope_class = $ruleRow('scope_class');
+	public function __construct(Nette\Database\Connection $db, $ID)
+	{
+		//gets rules table
+		parent::__construct($db, $ID, 'rules');
 	}
 
-	public function setDuration($nuDuration)
+	public function getID()
 	{
-		$this->duration = $nuDuration;
+		return $row['id'];
+	}
+	public function getCreator()
+	{
+		return $row['creator'];
+	}
+	public function getDNL()
+	{
+		return $row['dnl'];
+	}
+	public function getDateCreated()
+	{
+		return $row['date_created'];
+	}
+	public function getDateModified()
+	{
+		return $row['date_modified'];
+	}
+	public function getClass()
+	{
+		return $row['class'];
+	}
+	public function getScopeStatement1()
+	{
+		return $row['scope_statement1'];
+	}
+	public function getScopeStatement2()
+	{
+		return $row['scope_statement2'];
+	}
+	public function getScopeString()
+	{
+		return $row['scope_string'];
+	}
+	public function getPatternPremise()
+	{
+		return $row['pattern_premise'];
+	}
+	public function getPatternStatement()
+	{
+		return $row['pattern_statement'];
 	}
 
-	public function setDefinition($nuDef)
+
+
+	public function setID($nuID)
 	{
-		$this->definition = $nuDef;
+		$row['id'] = $nuID;
 	}
 
-	public function setUser($nuCreator)
+	public function setCreator($nuCreator)
 	{
-		$this->creator = $nuCreator; 
+		$row['creator'] = $nuCreator;
 	}
+
 	
-	public function add($mediaFile) 
-	{//Adds object to the end of the playlist
-	
-		//array_push($this->playlist, $mediaFile);
-		$this->playlist[] = $mediaFile;
-	}
-
-	public function delete($deleteInd) 
-	{
-		unset($this->playlist[$deleteInd]);
-		
-		//re-indexes playlist
-		$this->playlist = array_values($this->playlist);
-	}
 
 	
 	public function translateScope()
 	{
 		if(this->scope_class == "global")
-			this->scope_string = "For all readings,";
+			this->scope_tsring = "For all readings,";
 
 		else if(this->scope_class == "beforeR")
 			this->scope_string = "For all readings before the statement ".this->scope_statement1." becomes true,";
@@ -99,11 +118,6 @@ class SensorDataRule
 									" is true within the duration, is followed immediately by a reading where ".
 									"the statement ".this->pattern_statement." is true within the duration.";
 	}
-
-
-
-
-
 
 	public function __toString()
 	{
