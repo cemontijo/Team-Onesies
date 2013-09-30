@@ -1,74 +1,61 @@
 <?php
 class SensorDataRule extends GenericDatabase
 {
-	//private $id; //unique
-	//private $creator;
-	//private $DNL;
-	//private $dateCreated;
-	//private $scope_class, $scope_statement1, $scope_statement2, $scope_string;
-	//private $pattern_class, $pattern_premise, $pattern_statement, $pattern_string;
-
-	//private $database;
-	
 	public function __construct(Nette\Database\Connection $db, $ID)
 	{
 		//gets rules table
 		parent::__construct($db, $ID, 'rules');
 	}
 
-	public function getID()
-	{
+	public function getID(){
 		return $this->row['id'];
 	}
-	public function getCreator()
-	{
+
+	public function getCreator(){
 		return $this->row['creator'];
 	}
-	public function getDNL()
-	{
+
+	public function getDNL(){
 		return $this->row['dnl'];
 	}
-	public function getDateCreated()
-	{
+
+	public function getDateCreated(){
 		return $this->row['date_created'];
 	}
-	public function getDateModified()
-	{
+
+	public function getDateModified(){
 		return $this->row['date_modified'];
 	}
-	public function getClass()
-	{
+
+	public function getClass(){
 		return $this->row['class'];
 	}
-	public function getScopeStatement1()
-	{
+
+	public function getScopeStatement1(){
 		return $this->row['scope_statement1'];
 	}
-	public function getScopeStatement2()
-	{
+
+	public function getScopeStatement2(){
 		return $this->row['scope_statement2'];
 	}
 	
-	public function getRuleString()
-	{
+	public function getRuleString(){
 		return $this->row['rule_string'];
 	}
-	public function getScopeString()
-	{
+
+	public function getScopeString(){
 		return $this->row['scope_string'];
 	}
-	public function getPatternString()
-	{
+
+	public function getPatternString(){
 		return $this->row['pattern_string'];
 	}
 
-	
-	public function getPatternPremise()
-	{
+	public function getPatternPremise(){
 		return $this->row['pattern_premise'];
 	}
-	public function getPatternStatement()
-	{
+
+	public function getPatternStatement(){
 		return $this->row['pattern_statement'];
 	}
 
@@ -101,13 +88,52 @@ class SensorDataRule extends GenericDatabase
 	{
 		$this->row['scope_statement2'] = $nuSS2;
 	}
-	public function setScopeString($nuScopeStr)
+	
+	public function setScopeString()
 	{
-		$this->row['scope_string'] = $nuScopeStr;
+		if(getClass() == "global")
+			$this->row['scope_string'] = "For all readings,";
+
+		else if(getClass() == "beforeR")
+			$this->row['scope_string'] = "For all readings before the statement ".getScopeStatement1()." becomes true,";
+
+		else if(getClass() == "afterL")
+			$this->row['scope_string'] = "For all readings after the statement ".getScopeStatement1()." becomes true,";
+
+		else if(getClass() == "betweenLandR")
+			$this->row['scope_string'] = "For each interval of readings after which the statement ".getScopeStatement1().
+								" becomes true and until the statement ".getScopeStatement2()." first becomes true,";
+
+		else if(getClass() == "afterLuntilR")
+			$this->row['scope_string'] = "For each interval of readings after which the statement ".getScopeStatement1().
+								" becomes true and until the statement ".getScopeStatement2()." first becomes true,".
+								" or until the end of the readings if ".getScopeStatement2()." does not become true";
 	}
-	public function setPatternString($nuScopeStr)
+
+	public function setPatternString()
 	{
-		$this->row['scope_string'] = $nuScopeStr;
+		if(getClass() == "absence")
+			$this->row['pattern_string'] = "it is never the case that the statement ".getPatternStatement().
+									" is true within the duration.";
+
+		else if(getClass() == "universality")
+			$this->row['pattern_string'] = "it is always the case that the statement ".getPatternStatement().
+									" is true within the duration.";
+
+		else if(getClass() == "existence")
+			$this->row['pattern_string'] = "there is at least one reading in which the statement ".getPatternStatement().
+									" is true within the duration.";
+
+		else if(getClass() == "response")
+			$this->row['pattern_string'] = "every reading where the statement ".getPatternPremise().
+									" is true within the duration, is followed immediately by a reading where ".
+									"the statement ".getPatternStatement()." is true within the duration.";
+	}
+	
+	public function setRuleString()
+	{
+		//combines scope string and rule string
+		$this->row['rule_string'] = getScopeString() . getPatternString();
 	}
 
 
@@ -120,47 +146,5 @@ class SensorDataRule extends GenericDatabase
 		$this->row['pattern_statement'] = $nuPatternStatement;
 	}
 
-	
-	public function translateScope()
-	{
-		if($this->row['class'] == "global")
-			this->scope_tsring = "For all readings,";
-
-		else if($this->row['class'] == "beforeR")
-			this->scope_string = "For all readings before the statement ".this->scope_statement1." becomes true,";
-
-		else if($this->row['class'] == "afterL")
-			this->scope_string = "For all readings after the statement ".this->scope_statement1." becomes true,";
-
-		else if($this->row['class'] == "betweenLandR")
-			this->scope_string = "For each interval of readings after which the statement ".this->scope_statement1.
-								" becomes true and until the statement ".this->scope_statement2." first becomes true,";
-
-		else if($this->row['class'] == "afterLuntilR")
-			this->scope_string = "For each interval of readings after which the statement ".this->scope_statement1.
-								" becomes true and until the statement ".this->scope_statement2." first becomes true,".
-								" or until the end of the readings if ".this->scope_statement2." does not become true";
-	}
-
-	public function translatePattern()
-	{
-		if($this->row['class'] == "absence")
-			this->pattern_string = "it is never the case that the statement ".this->pattern_statement.
-									" is true within the duration.";
-
-		else if($this->row['class'] == "universality")
-			this->pattern_string = "it is always the case that the statement ".this->pattern_statement.
-									" is true within the duration.";
-
-		else if(this->pattern_class == "existence")
-			this->pattern_string = "there is at least one reading in which the statement ".this->pattern_statement.
-									" is true within the duration.";
-
-		else if(this->pattern_class == "response")
-			this->pattern_string = "every reading where the statement ".this->pattern_premise.
-									" is true within the duration, is followed immediately by a reading where ".
-									"the statement ".this->pattern_statement." is true within the duration.";
-	}
-
-}//SensorDataRules
+}//SensorDataRule
 ?>
