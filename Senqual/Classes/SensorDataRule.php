@@ -1,16 +1,14 @@
 <?php
 class SensorDataRule extends GenericDatabase
 {
-	//private $ruleID; //unique
+	//private $id; //unique
 	//private $creator;
 	//private $DNL;
 	//private $dateCreated;
-
 	//private $scope_class, $scope_statement1, $scope_statement2, $scope_string;
 	//private $pattern_class, $pattern_premise, $pattern_statement, $pattern_string;
 
-	/** @var Nette\Database\Connection */
-	private $database;
+	//private $database;
 	
 	public function __construct(Nette\Database\Connection $db, $ID)
 	{
@@ -20,108 +18,125 @@ class SensorDataRule extends GenericDatabase
 
 	public function getID()
 	{
-		return $row['id'];
+		return $this->row['id'];
 	}
 	public function getCreator()
 	{
-		return $row['creator'];
+		return $this->row['creator'];
 	}
 	public function getDNL()
 	{
-		return $row['dnl'];
+		return $this->row['dnl'];
 	}
 	public function getDateCreated()
 	{
-		return $row['date_created'];
+		return $this->row['date_created'];
 	}
 	public function getDateModified()
 	{
-		return $row['date_modified'];
+		return $this->row['date_modified'];
 	}
 	public function getClass()
 	{
-		return $row['class'];
+		return $this->row['class'];
 	}
 	public function getScopeStatement1()
 	{
-		return $row['scope_statement1'];
+		return $this->row['scope_statement1'];
 	}
 	public function getScopeStatement2()
 	{
-		return $row['scope_statement2'];
+		return $this->row['scope_statement2'];
+	}
+	
+	public function getRuleString()
+	{
+		return $this->row['rule_string'];
 	}
 	public function getScopeString()
 	{
-		return $row['scope_string'];
+		return $this->row['scope_string'];
 	}
+	public function getPatternString()
+	{
+		return $this->row['pattern_string'];
+	}
+
+	
 	public function getPatternPremise()
 	{
-		return $row['pattern_premise'];
+		return $this->row['pattern_premise'];
 	}
 	public function getPatternStatement()
 	{
-		return $row['pattern_statement'];
+		return $this->row['pattern_statement'];
 	}
 
 	
 	public function setID($nuID)
 	{
-		$row['id'] = $nuID;
+		$this->row['id'] = $nuID;
 	}
 	public function setCreator($nuCreator)
 	{
-		$row['creator'] = $nuCreator;
+		$this->row['creator'] = $nuCreator;
 	}
 	public function setDNL($nuDNL)
 	{
-		$row['dnl'] = $nuDNL;
+		$this->row['dnl'] = $nuDNL;
 	}
 	public function setDateModified($nuDateModified)
 	{
-		$row['date_modified'] = $nuDateModified;
+		$this->row['date_modified'] = $nuDateModified;
 	}
 	public function setClass($nuClass)
 	{
-		$row['class'] = $nuClass;
+		$this->row['class'] = $nuClass;
 	}
 	public function setScopeStatement1($nuSS1)
 	{
-		$row['scope_statement1'] = $nuSS1;
+		$this->row['scope_statement1'] = $nuSS1;
 	}
 	public function setScopeStatement2($nuSS2)
 	{
-		$row['scope_statement2'] = $nuSS2;
+		$this->row['scope_statement2'] = $nuSS2;
 	}
 	public function setScopeString($nuScopeStr)
 	{
-		$row['scope_string'] = $nuScopeStr;
+		$this->row['scope_string'] = $nuScopeStr;
 	}
+	public function setPatternString($nuScopeStr)
+	{
+		$this->row['scope_string'] = $nuScopeStr;
+	}
+
+
 	public function setPatternPremise($nuPatternPremise)
 	{
-		$row['pattern_premise'] = $nuPatternPremise;
+		$this->row['pattern_premise'] = $nuPatternPremise;
 	}
 	public function setPatternStatement($nuPatternStatement)
 	{
-		$row['pattern_statement'] = $nuPatternStatement;
+		$this->row['pattern_statement'] = $nuPatternStatement;
 	}
 
 	
 	public function translateScope()
 	{
-		if(this->scope_class == "global")
+		if($this->row['class'] == "global")
 			this->scope_tsring = "For all readings,";
 
-		else if(this->scope_class == "beforeR")
+		else if($this->row['class'] == "beforeR")
 			this->scope_string = "For all readings before the statement ".this->scope_statement1." becomes true,";
 
-		else if(this->scope_class == "afterL")
+		else if($this->row['class'] == "afterL")
 			this->scope_string = "For all readings after the statement ".this->scope_statement1." becomes true,";
 
-		else if(this->scope_class == "betweenLandR")
+		else if($this->row['class'] == "betweenLandR")
 			this->scope_string = "For each interval of readings after which the statement ".this->scope_statement1.
 								" becomes true and until the statement ".this->scope_statement2." first becomes true,";
 
-		else if(this->scope_class == "afterLuntilR")
+		else if($this->row['class'] == "afterLuntilR")
 			this->scope_string = "For each interval of readings after which the statement ".this->scope_statement1.
 								" becomes true and until the statement ".this->scope_statement2." first becomes true,".
 								" or until the end of the readings if ".this->scope_statement2." does not become true";
@@ -129,11 +144,11 @@ class SensorDataRule extends GenericDatabase
 
 	public function translatePattern()
 	{
-		if(this->pattern_class == "absence")
+		if($this->row['class'] == "absence")
 			this->pattern_string = "it is never the case that the statement ".this->pattern_statement.
 									" is true within the duration.";
 
-		else if(this->pattern_class == "universality")
+		else if($this->row['class'] == "universality")
 			this->pattern_string = "it is always the case that the statement ".this->pattern_statement.
 									" is true within the duration.";
 

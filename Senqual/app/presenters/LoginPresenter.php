@@ -61,22 +61,33 @@ class LoginPresenter extends BasePresenter
 		$form->addPassword('rpassword', 'rPassword:')
 			->setRequired('Please re-enter your password.');
 
-		/*$form->addText('phone', 'Phone:')
-			->setOption('Please enter your phone number.');
-		*/
+		$form->addText('phone', 'Phone:');
+			//('Please enter your phone number.');
+		
 		
 		$form->addCheckbox('remember', 'Keep me signed in');
 		$form->addSubmit('send', 'Submit');
 
 		// call method signInFormSucceeded() on success
-		$form->onSuccess[] = $this->signInFormSucceeded;
+		$form->onSuccess[] = $this->newUserFormSucceeded;
 		return $form;
 	}
 
 	public function newUserFormSucceeded($form)
 	{
 		$values = $form->getValues();
-		
+
+		$arrayValues = array(
+			'email' => $values['email'],
+			'name' => $values['username'],
+			'title' => $values['title'],
+			'affiliation' => $values['affiliation'],
+			'password' => $values['password'],
+			'phone' => $values['phone'],
+			);
+
+		//Stores new profile in DB
+		$this->database->table('user_profile')->insert($arrayValues);
 	}
 	
 	public function signInFormSucceeded($form)
