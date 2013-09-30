@@ -8,7 +8,8 @@ use Nette\Application\UI;
  */
 class LoginPresenter extends BasePresenter
 {
-
+	private $database;
+	
 	public function __construct(Nette\Database\Connection $database)
 	{
 		$this->database = $database;
