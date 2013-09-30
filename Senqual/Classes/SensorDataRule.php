@@ -63,19 +63,47 @@ class SensorDataRule extends GenericDatabase
 		return $row['pattern_statement'];
 	}
 
-
-
+	
 	public function setID($nuID)
 	{
 		$row['id'] = $nuID;
 	}
-
 	public function setCreator($nuCreator)
 	{
 		$row['creator'] = $nuCreator;
 	}
-
-	
+	public function setDNL($nuDNL)
+	{
+		$row['dnl'] = $nuDNL;
+	}
+	public function setDateModified($nuDateModified)
+	{
+		$row['date_modified'] = $nuDateModified;
+	}
+	public function setClass($nuClass)
+	{
+		$row['class'] = $nuClass;
+	}
+	public function setScopeStatement1($nuSS1)
+	{
+		$row['scope_statement1'] = $nuSS1;
+	}
+	public function setScopeStatement2($nuSS2)
+	{
+		$row['scope_statement2'] = $nuSS2;
+	}
+	public function setScopeString($nuScopeStr)
+	{
+		$row['scope_string'] = $nuScopeStr;
+	}
+	public function setPatternPremise($nuPatternPremise)
+	{
+		$row['pattern_premise'] = $nuPatternPremise;
+	}
+	public function setPatternStatement($nuPatternStatement)
+	{
+		$row['pattern_statement'] = $nuPatternStatement;
+	}
 
 	
 	public function translateScope()
@@ -117,24 +145,6 @@ class SensorDataRule extends GenericDatabase
 			this->pattern_string = "every reading where the statement ".this->pattern_premise.
 									" is true within the duration, is followed immediately by a reading where ".
 									"the statement ".this->pattern_statement." is true within the duration.";
-	}
-
-	public function __toString()
-	{
-		$display = $this->playlistName;//." (untyped)"; 
-		return (string) $display;
-	}
-
-	public function displayPlaylist(){
-		echo "<br><br>======================================================";
-		echo "<br>".$this->playlistName."<br>";
-		echo "======================================================";
-		for($size=count($this->playlist),$i = 0; $i<$size; $i++)
-		{
-			echo "<br>Index: ".$i;			
-			echo $this->playlist[$i];//->__toString();//playlist.get(i).toString();
-		}
-		echo "<br>======================================================";
 	}
 
 }//SensorDataRules
