@@ -19,7 +19,7 @@ private class GenericDatabase
 		if($id > 0)//assume row exists in table
 		{
 			try{
-				$row = $database->tables($tableName).select($id);
+				$this->row = $this->database->tables($this->tableName)->select($this->id);
 			}
 			catch(Exception e)
 			{//if NOT in table, error
@@ -27,24 +27,23 @@ private class GenericDatabase
 			}
 		
 		else 
-			$row = createNullRow();
+			$this->row = createNullRow();
 	}
 
 	private function createNullRow()
 	{
-		
-
+		return null;
 	}
 	
 	public function save() 
 	{
-		if($id < 0)//insert row if not already in table
-			$database->tables($tableName).insert($row);	
+		if($this->id < 0)//insert row if not already in table
+			$this->database->tables($this->tableName)->insert($this->row);	
 
 		else
 		{
 			try{//assume row is already in table
-				$database->tables($tableName).update($row);	
+				$this->database->tables($this->tableName)->update($this->row);	
 			}
 			catch(Exception e)
 			{//error if row is NOT in table 
@@ -54,7 +53,7 @@ private class GenericDatabase
 
 	public function delete() 
 	{
-		$database->tables($tableName).delete($id);
+		$this->database->tables($this->tableName)->delete($this->id);
 	}
 
 }//GenericDatabase
