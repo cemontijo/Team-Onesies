@@ -24,12 +24,12 @@ common:
 			expiration: 14 days
 			
 		security:
-			users:
-				admin: secret  # user 'admin', password 'secret'
+			#users:
+			#	admin: secret  # user 'admin', password 'secret'
 
 
 	services:
-		#authenticator: Authenticator
+		authenticator: Authenticator
 		routerFactory: RouterFactory
 		router: @routerFactory::createRouter
 

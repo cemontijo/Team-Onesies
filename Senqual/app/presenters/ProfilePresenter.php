@@ -20,75 +20,75 @@ class ProfilePresenter extends BasePresenter
 		//$this->user ->database->table('user_profile') = array();
 		//$this-> users = array();
 	}
-	/*
-	public function load($id){
-		$ruleRow = $database->tables('user_profile').select($id);
-		$scope_class = $ruleRow('scope_class');
-		$scope_statement1 = $ruleRow('scope_statement1');
-		$scope_class = $ruleRow('scope_class');
-		$scope_class = $ruleRow('scope_class');
-		$scope_class = $ruleRow('scope_class');
-		$scope_class = $ruleRow('scope_class');
-		$scope_class = $ruleRow('scope_class');
-		$scope_class = $ruleRow('scope_class');
-		$scope_class = $ruleRow('scope_class');
-	}
-	*/
-	public function setName($nuName)
+	
+	protected function createComponentProfileForm()
 	{
-		$this->name = $nuName;
-	}
-	public function setTitle($nuTitle)
-	{
-		$this->title = $nuTitle;
-	}
+		$form = new Nette\Application\UI\Form;
+		
+		$form->addText('email', 'Email (Username):')
+			->setRequired();
 
-	public function setAffiliation($nuAffi)
-	{
-		$this->affiliation = $nuAffi; 
-	}
-	public function setEmail($nuEmail)
-	{
-		$this->email = $nuEmail; 
-	}
-	public function setPassword($nuPass)
-	{
-		$this->password = $nuPass; 
-	}
-	public function add($userInfo) 
-	{
-		$this->values[] = $userInfo;
-	}
-	public function delete($deleteInd) 
-	{
-		unset($this->values[$deleteInd]);
-		$this->values = array_values($this->values);
-	}
-	public function renderDefault()
-	{
-		$this->template->profile = $this->database->table('user_profile');
+		$form->addText('name', 'Your Name:')
+			->setRequired();
 		
-		
-		
-	}
-	public function editValues()
-	{
-		
-	}
-	public function handleUpdateData()
-	{
-		$email = $this->getParam('email');
-		$fields = (array) $this->getParam('user_profile');
-		$tableName = $this->getParam('user_profile');
-		$row = $this->database->update($tableName, $fields, $email);
-		
-		
-		
-		//$control->getComponent('name')->render();
-		//echo $contol;
+		$form->addText('title', 'Title:');
+		$form->addText('affiliation', 'Affiliation:');
+		$form->addPassword('password', 'Password:')
+			->setRequired();
 
-	}
+		$form->addText('phone', 'Phone:');
+		
+		$form->addSubmit('submit', 'Submit');
+		
+		$form->onSuccess[] = $this->profileFormSucceeded;
 
+		return $form;
+	}
+	
+	public function profileFormSucceeded(Nette\Application\UI\Form $form)
+	{
+		if (!$this->user->isLoggedIn()) {
+			$this->redirect("Login:");
+		}
+	
+		$values = $form->getValues();
+		$id = $this->user->getId();
+		$email = $this->database->table('user')->get($id)->username;
+	
+		if ($email) {
+			$user = $this->database->table('user_profile')->where('email', $email);
+			$user->update($values);
+			$this->database->exec("UPDATE user SET username=?, password=? WHERE id=?", 
+					$values['email'], $values['password'], $id);
+		} else {
+			$user = $this->database->table('user_profile')->insert($values);
+		}
+	
+		$this->flashMessage('User created', 'success');
+		$this->redirect('Profile:edit');
+	}
+	
+	public function actionEdit()
+	{
+		if (!$this->user->isLoggedIn()) {
+			$this->redirect('Login:');
+		}
+	
+		$id = $this->user->getId();
+		$email = $this->database->table('user')->get($id)->username;
+		$user = $this->database->table('user_profile')->where('email', $email)->fetch();
+		if (!$user) {
+			$this->error('User not found');
+		}
+		$this['profileForm']->setDefaults(array(
+			'email' => $user->email,
+			'name' => $user->name,
+			'title' => $user->title,
+			'affiliation' => $user->affiliation,
+			'password' => $user->password,
+			'phone' => $user->phone
+		));
+	}
 }
 
 
