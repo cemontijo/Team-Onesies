@@ -3,14 +3,19 @@
 
 <div class="well span5 center login-box">
 	<div class="alert alert-info">
-		Please login with your UTEP Miners Account.
+		<p>
+			The Sensor Quality (SenQual) Monitoring System provides
+			users with the ability to specify rules that can be used 
+			to monitor data collected in near real time or data that
+			has been stored in files.
+		</p>
 	</div>
 	{form signInForm, class => form-horizontal}
 		<div class="alert alert-error" n:foreach="$form->errors as $error">
 			<strong>{$error}</strong>
 		</div>
 		<fieldset>
-			<div class="input-prepend" title="Miners Username" data-rel="tooltip">
+			<div class="input-prepend" title="Username" data-rel="tooltip">
 				<span class="add-on"><i class="icon-user"></i></span>{input username, class => 'input-large span10', autofocus => true}
 			</div>
 			<div class="clearfix"></div>
@@ -25,6 +30,114 @@
 			</p>
 		</fieldset>
 	{/form}
+	<a href="#">Forgot Password?</a> <br /><br />
+	<a href="#myModal" role="button" data-toggle="modal">New User</a>	
 </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">New User</h3>
+	</div>
+	<div class="modal-body">
+		<div class="well login-box">
+			<div class="alert alert-info">
+		
+				Please fill out the following information.
+					
+			</div>
+			
+			<!-- New User Form -->
+			{form newUserForm, class => form-horizontal}
+				<fieldset>
+					<div name="form" class="input-prepend" title="Name" data-rel="tooltip">
+						<strong>Name:</strong>{input username, class => 'input-large span10', autofocus => true} 
+					</div>
+					<div class="clearfix"></div>
+					
+					<div name="form" class="input-prepend" title="Title" data-rel="tooltip">
+						<strong>Title: </strong>{input title, class => 'input-large span10', autofocus => true}
+					</div>
+					<div class="clearfix"></div>
+					
+					<div name="form" class="input-prepend" title="Affiliation" data-rel="tooltip">
+						<strong>Affiliation:</strong>{input affiliation, class => 'input-large span10', autofocus => true}
+					</div>
+					<div class="clearfix"></div>				
+					
+					<div name="form" class="input-prepend" title="Email" data-rel="tooltip">
+						<strong>E-mail Address:</strong>{input email, class => 'input-large span10', autofocus => true}
+					</div>
+					<div class="clearfix"></div>
+
+					<div name="form" class="input-prepend" title="Password" data-rel="tooltip">
+						<strong>Password:</strong>{input password, class => 'input-large span10'}
+					</div>
+					<div name="form" class="clearfix"></div>
+				
+					<div name="form" class="input-prepend" title="rPassword" data-rel="tooltip">
+						<strong>Repeat Password:</strong>{input rpassword, class => 'input-large span10'}
+					</div>
+					<div class="clearfix"></div>
+		
+					
+					<!-- Notifications -->
+					<span class="help-block"><strong>Select how you would like to be notified when an anomaly is detected.</strong></span>
+					<div>
+						<label class="checkbox1">
+							<input type="checkbox" name="optionNotifications" id="optionNotifications1" value="option1" > E-mail
+						</label>
+						<div class="clearfix"></div>
+						
+						<label class="checkbox1">
+							<input type="checkbox" name="optionNotifications" id="optionNotifications2" value="option2" > Text
+						<label>
+						<div class="clearfix"></div>
+						
+						<label class="checkbox1">
+							<input type="checkbox" name="optionNotifications" id="optionNotifications3" value="option3" > No Notification
+						</label>
+					</div>
+						
+					<!-- Frequency -->	
+					<span class="help-block"><strong>Select the frequency of notification.</strong></span>
+					<div>
+						<label class="checkbox2">
+							<input type="checkbox" name="optionNotifications" id="optionFrequency1" value="option1" > Each anomaly detected
+						</label>
+						<div class="clearfix"></div>
+						
+						<label class="checkbox2">
+							<input type="checkbox" name="optionNotifications" id="optionFrequency2" value="option2"> Once for each rule violated
+						</label>
+						<div class="clearfix"></div>
+						
+						<label class="checkbox2">
+							<input type="checkbox" name="optionNotifications" id="optionFrequency3" value="option3"> Once
+						</label>
+						<div class="clearfix"></div>
+					</div>
+					
+					<div class="btn center span5">Clear</div>
+					
+					<p class="center span5">
+						{input send, class => 'btn btn-primary'}
+					</p>
+				</fieldset>
+			{/form}
+		</div>		
+	</div>
+</div>
+
+<script>
+function clear(){
+	clear = document.getElementsByName("form");
+	alert(clear[0]);
+}
+</script>
+
+	         
+
 
 

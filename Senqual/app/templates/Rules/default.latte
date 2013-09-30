@@ -8,6 +8,9 @@
 
 {block content}
 
+<!-- RULES PAGE --> 
+
+<script src="{$basePath}/js/rules/rules.js"></script>
 
 <!-- SELECT RULE -->
 <div class="row-fluid">
@@ -24,7 +27,7 @@
 				<thead>
 					<tr>						
 						<th>New Rule</th>
-						<th>Exisiting Rule</th>
+						<th>Existing Rule</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -81,21 +84,21 @@
 				<tbody>
 					<tr>
 						<td>
-							<select size="1">
-								<option value="0" selected="selected">Select a Duration</option>
-								<option value="1">All readings</option>
-								<option value="2">All Readings After L</option>
-								<option value="2">All Readings Before R</option>
-								<option value="2">All Readings Between L and R</option>
+							<select onChange="durationSelect(this)" id="dur" size="1">
+								<option id="dur0" value="0" selected="selected">Select a Duration</option>
+								<option id="dur1" value="1">All readings</option>
+								<option id="dur2" value="2">All Readings After L</option>
+								<option id="dur3" value="2">All Readings Before R</option>
+								<option id="dur4" value="2">All Readings Between L and R</option>
 							</select>
 						</td>
 						<td>
-							<select size="1">
-								<option value="0" selected="selected">Select Rule Definition</option>
-								<option value="1">Universality</option>
-								<option value="2">Absence</option>
-								<option value="2">Existence</option>
-								<option value="2">Response</option>
+							<select onChange="definitionSelect(this)" size="1">
+								<option id="def0" value="0" selected="selected">Select Rule Definition</option>
+								<option id="def1" value="1">Universality</option>
+								<option id="def2" value="2">Absence</option>
+								<option id="def3" value="2">Existence</option>
+								<option id="def4" value="2">Response</option>
 							</select>
 						</td>
 					</tr>
@@ -118,7 +121,7 @@
 			</div>
 		</div>
 		<div class="box-content">
-			<select size="1">
+			<select name="left" size="1">
 				<option value="0" selected="selected">Select Sensor</option>
 				<option value="1">Registered Sensor 1</option>
 				<option value="1">Registered Sensor 2</option>
@@ -135,21 +138,21 @@
 				</tbody>
 			</table> 
 			<span>
-				<button type="button" class="btn btn span1">=</button>
-				<button type="button" class="btn span1">!=</button>
-				<button type="button" class="btn span1"><</button>
-				<button type="button" class="btn span1">></button>
-				<button type="button" class="btn span1">>=</button>
-				<button type="button" class="btn span1"><=</button>
-				<button type="button" class="btn span2">OR</button>
-				<button type="button" class="btn span2">AND</button>
-				<button type="button" class="btn span2">NOT</button>
+				<button name="left" type="button" class="btn btn span1"&ge;</button>
+				<button name="left" type="button" class="btn span1">&ne;</button>
+				<button name="left" type="button" class="btn span1"><</button>
+				<button name="left" type="button" class="btn span1">></button>
+				<button name="left" type="button" class="btn span1">&ge;</button>
+				<button name="left" type="button" class="btn span1">&le;</button>
+				<button name="left" type="button" class="btn span2">OR</button>
+				<button name="left" type="button" class="btn span2">AND</button>
+				<button name="left" type="button" class="btn span2">NOT</button>
 			</span>
 			<div class="clearfix"></div>
 			<br />
 			<span>Left Boundary Sub-formula</span>
 			<div>
-				<input type="text" class="span12">
+				<input name="left" type="text" class="span12">
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -165,7 +168,7 @@
 			</div>
 		</div>
 		<div class="box-content">
-			<select size="1">
+			<select name="right" size="1">
 				<option value="0" selected="selected">Select Sensor</option>
 				<option value="1">Registered Sensor 1</option>
 				<option value="1">Registered Sensor 2</option>
@@ -185,21 +188,21 @@
 				</tbody>
 			</table> 
 			<span>
-				<button type="button" class="btn btn span1">=</button>
-				<button type="button" class="btn span1">!=</button>
-				<button type="button" class="btn span1"><</button>
-				<button type="button" class="btn span1">></button>
-				<button type="button" class="btn span1">>=</button>
-				<button type="button" class="btn span1"><=</button>
-				<button type="button" class="btn span2">OR</button>
-				<button type="button" class="btn span2">AND</button>
-				<button type="button" class="btn span2">NOT</button>
+				<button name="right" type="button" class="btn btn span1"&ge;</button>
+				<button name="right" type="button" class="btn span1">&ne;</button>
+				<button name="right" type="button" class="btn span1"><</button>
+				<button name="right" type="button" class="btn span1">></button>
+				<button name="right" type="button" class="btn span1">&ge;</button>
+				<button name="right" type="button" class="btn span1">&le;</button>
+				<button name="right" type="button" class="btn span2">OR</button>
+				<button name="right" type="button" class="btn span2">AND</button>
+				<button name="right" type="button" class="btn span2">NOT</button>
 			</span>
 			<div class="clearfix"></div>
 			<br />
 			<span>Right Boundary Sub-formula</span>
 			<div>
-				<input type="text" class="span12">
+				<input name="right" type="text" class="span12">
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -218,7 +221,7 @@
 			</div>
 		</div>
 		<div class="box-content">
-			<select size="1">
+			<select name="premise" size="1">
 				<option value="0" selected="selected">Select Sensor</option>
 				<option value="1">Registered Sensor 1</option>
 				<option value="1">Registered Sensor 2</option>
@@ -238,21 +241,21 @@
 				</tbody>
 			</table> 
 			<span>
-				<button type="button" class="btn btn span1">=</button>
-				<button type="button" class="btn span1">!=</button>
-				<button type="button" class="btn span1"><</button>
-				<button type="button" class="btn span1">></button>
-				<button type="button" class="btn span1">>=</button>
-				<button type="button" class="btn span1"><=</button>
-				<button type="button" class="btn span2">OR</button>
-				<button type="button" class="btn span2">AND</button>
-				<button type="button" class="btn span2">NOT</button>
+				<button name="premise" type="button" class="btn btn span1"&ge;</button>
+				<button name="premise" type="button" class="btn span1">&ne;</button>
+				<button name="premise" type="button" class="btn span1"><</button>
+				<button name="premise" type="button" class="btn span1">></button>
+				<button name="premise" type="button" class="btn span1">&ge;</button>
+				<button name="premise" type="button" class="btn span1">&le;</button>
+				<button name="premise" type="button" class="btn span2">OR</button>
+				<button name="premise" type="button" class="btn span2">AND</button>
+				<button name="premise" type="button" class="btn span2">NOT</button>
 			</span>
 			<div class="clearfix"></div>
 			<br />
 			<span>Premise Sub-formula</span>
 			<div>
-				<input type="text" class="span12">
+				<input name="premise" type="text" class="span12">
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -288,12 +291,12 @@
 				</tbody>
 			</table> 
 			<span>
-				<button type="button" class="btn btn span1">=</button>
-				<button type="button" class="btn span1">!=</button>
+				<button type="button" class="btn btn span1"&ge;</button>
+				<button type="button" class="btn span1">&ne;</button>
 				<button type="button" class="btn span1"><</button>
 				<button type="button" class="btn span1">></button>
-				<button type="button" class="btn span1">>=</button>
-				<button type="button" class="btn span1"><=</button>
+				<button type="button" class="btn span1">&ge;</button>
+				<button type="button" class="btn span1">&le;</button>
 				<button type="button" class="btn span2">OR</button>
 				<button type="button" class="btn span2">AND</button>
 				<button type="button" class="btn span2">NOT</button>
