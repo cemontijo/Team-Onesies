@@ -15,7 +15,6 @@ class Monitor extends DataObject
 	public function setName($name)
 	{
 		$this->row['name'] = $name;
-		echo $name;
 	}
 }
 

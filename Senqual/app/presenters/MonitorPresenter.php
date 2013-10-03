@@ -65,6 +65,7 @@ class MonitorPresenter extends BasePresenter
 		$monitor = new Monitor($this->database, $id);
 		$monitor->setName($name);
 		$monitor->save();
+		//$monitor->save();
 		/*if ($id>0) {
 			$this->database->exec('UPDATE monitors SET name=? WHERE id=?', $name, $id);
 		} else {
@@ -77,7 +78,7 @@ class MonitorPresenter extends BasePresenter
 		}*/
 	
 		$this->flashMessage('Monitor was published', 'success');
-		//$this->redirect('Monitor:');
+		$this->redirect('Monitor:');
 	}
 	
 	public function actionCreate()
@@ -98,7 +99,7 @@ class MonitorPresenter extends BasePresenter
 			$this->error('Monitor not found');
 		}
 		$this['monitorForm']->setDefaults(array('id'=>$id,'name'=>$monitor->name));*/
-		$monitor = new Monitor($this->database, 1);
+		$monitor = new Monitor($this->database, $id);
 		$this['monitorForm']->setDefaults(array('id'=>$id,'name'=>$monitor->getName()));
 	}
 	

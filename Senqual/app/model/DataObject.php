@@ -31,22 +31,29 @@ class DataObject
 
 	private function createNullRow()
 	{
-		$this->database->exec('INSERT INTO '.$this->table->getName().' VALUES (-1)');
-		$this->row = $this->table->get(-1);
-		
+		$this->row = $this->table->getReflection();
 	}
 	
 	public function save() 
 	{
-		$this->id = -1;
 		if($this->id < 0)
 		{
 			//
 			//insert row if not already in table
 			//
 			
+			// if new entry $row is array, else it is a Database\Selection object
+			// convert to array
+			if ( is_array($this->row) )
+			{
+				$rowArray = $this->row;
+			}
+			else 
+			{
+				$this->row->toArray();
+			}
+			
 			// drop id for insert - retrieve Autoincrement Id from DB
-			$rowArray = $this->row->toArray();
 			unset($rowArray['id']);
 			$this->row = $this->table->insert($rowArray);
 
