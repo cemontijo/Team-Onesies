@@ -65,27 +65,19 @@ class MonitorPresenter extends BasePresenter
 		$monitor = new Monitor($this->database, $id);
 		$monitor->setName($name);
 		$monitor->save();
-		//$monitor->save();
-		/*if ($id>0) {
-			$this->database->exec('UPDATE monitors SET name=? WHERE id=?', $name, $id);
-		} else {
-			try {
-				$this->database->exec('INSERT INTO monitors',
-						array("name" => $name));
-			} catch (Exception $e) {
-				$this->flashMessage("Entry already exists!");
-			}
-		}*/
 	
 		$this->flashMessage('Monitor was published', 'success');
 		$this->redirect('Monitor:');
 	}
 	
-	public function actionCreate()
+	public function actionCreate($id, $foo, $kuh)
 	{
 		if (!$this->user->isLoggedIn()) {
 			$this->redirect('Login:');
 		}
+		$this->template->a = $id;
+		$this->template->b = $foo;
+		$this->template->c = $kuh;
 	}
 	
 	public function actionRename($id)
