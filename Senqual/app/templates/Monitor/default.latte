@@ -1,0 +1,137 @@
+{* MonitorPage *}
+
+{block content}
+
+<script>
+   	//init
+   	window.onload = function(){
+   		$("#monitorsBox .panel-title").click(function(){
+   			var parent=$(this).parent();
+   			while ( !parent.hasClass("panel panel-default") ){
+   				parent = parent.parent();
+   			}
+   			
+ 				if ( !parent.hasClass("active") ) {
+ 					$("#monitorsBox .panel.panel-default").removeClass("active");
+ 					parent.addClass("active");
+ 					$("#monitorsBox .list-group a").removeClass("active");
+ 				}
+   			
+   			// collapsed
+   			//if ( !collapse.hasClass("in") ) {
+   			//	selectedMonitor = this.id.split("<|>")[1];
+   			//	$("#monitorsBox .list-group a").removeClass("active");
+   			//}
+   		});
+   	}
+   
+   	function selectRule(rule){
+   		$("#rulesBox a").removeClass("active");
+   		$(rule).addClass("active");
+   	}
+   	
+   	function selectMonitorRule(rule){
+   		$("#monitorsBox .list-group a").removeClass("active");
+   		$(rule).addClass("active");
+		var parent=$(rule).parent();
+		while ( !parent.hasClass("panel panel-default") ){
+			parent = parent.parent();
+		}
+		if ( !parent.hasClass("active") ) {
+			$("#monitorsBox .panel.panel-default").removeClass("active");
+			parent.addClass("active");
+		}
+   	}
+   	
+   	function deleteRule(){
+   		var selectedRules = $("#monitorsBox .list-group-item.active");
+   		var selectedMonitors = $("#monitorsBox .panel.panel-default.active");
+   		if ( selectedRules.length > 0 && selectedMonitors.length > 0){
+   			var selectedMonitor = selectedMonitors[0].id.split("<|>")[1];
+   			window.location = "delete-rule/" + selectedRules[0].innerHTML + "&" + selectedMonitor ;
+   		}
+   	}
+   	
+   	function addRule(){
+   		var selectedRules = $("#rulesBox a.active");
+   		var selectedMonitors = $("#monitorsBox .panel.panel-default.active");
+   		if ( selectedRules.length > 0 && selectedMonitors.length > 0){
+   			var selectedMonitor = selectedMonitors[0].id.split("<|>")[1];
+   			window.location = "add-rule/" + selectedRules[0].innerHTML + "&" + selectedMonitor ;
+   		}
+   	}
+   	
+   	function rename(){
+   		var selectedMonitors = $("#monitorsBox .panel.panel-default.active");
+   		if ( selectedMonitors.length > 0){
+   			var selectedMonitor = selectedMonitors[0].id.split("<|>")[1];
+   			window.location = "rename/" + selectedMonitor;
+   		}
+   	}
+   </script>
+
+<div class="row">
+	<div class="span4">
+	   	<h3>Choose rules from:</h3>
+	    <div class="input-group">
+	      <input type="text" class="form-control" placeholder="<keyword to filter rules>" >
+	      <span class="input-group-btn">
+	        <button class="btn btn-default" type="button">Search</button>
+	      </span>
+	    </div><!-- /input-group -->
+	    <div class="list-group" id="rulesBox">
+		  {foreach $rules as $rule}
+		  <a href="#" class="list-group-item" onclick="selectRule(this)">{$rule->id}</a>
+		  {/foreach}
+		</div>
+	    <button type="button" class="btn btn-default" style="width:100%;" onclick="addRule()" >
+	    	Add Rule&gt;&gt;
+	    </button>
+    </div>
+   
+    <div class="span4">
+     <h2>Monitors:</h2>
+     <div class="panel-group" id="monitorsBox">
+      {foreach $monitors as $monitor}
+	  <div id="Monitor<|>{$monitor->getId()}" class="panel panel-default">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{$monitor->getId()}">
+	          {$monitor->getName()}
+	        </a>
+	      </h4>
+	    </div>
+	    <div id="collapse{$monitor->getId()}" class="panel-collapse collapse in">
+	      <div class="panel-body">
+	      	<div class="list-group">
+	      	{foreach $monitor->getRules() as $rule}
+			  <a href="#" class="list-group-item" onclick="selectMonitorRule(this)">{$rule->getDnl()}</a>
+			 {/foreach}
+			</div>
+	      </div>
+	    </div>
+	  </div>
+	  {/foreach}
+	</div>
+	<button type="button" class="btn btn-default" style="width:100%;  margin-top:1em;" onClick="deleteRule()">
+		&lt;&lt; Delete Rule
+	</button>
+	
+	<div align="center" style="margin-top:1em;">
+	<form>
+		<a n:href="Monitor:Create 1, foo=>lala, kuh=>muh">Test</a>
+		<button type="submit" class="btn btn-default" formaction="new">New</button>
+		<button type="button" class="btn btn-default" onclick="rename();">Rename</button>
+		<button type="button" class="btn btn-default">Share</button>
+	</form>
+	</div>
+   </div>
+    <div class="span4">
+      <button type="button" class="btn btn-default" style="width:100%;  margin-top:1em;">
+		Near-RT
+	  </button>
+      <button type="button" class="btn btn-default" style="width:100%;  margin-top:1em;">
+		Logged Data
+	  </button>
+    </div>
+</div>
