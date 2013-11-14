@@ -2,7 +2,6 @@
 
 namespace Senqual\Data;
 use Nette\Database;
-use Nette;
 
 abstract class DataObject implements IDataObject
 {
@@ -13,13 +12,13 @@ abstract class DataObject implements IDataObject
 	private $tableName;
 	private $id;
 	private $isDeleted;
-	private $username;
+	private $userId;
 	
-	protected function __construct(Database\Connection $database, $username, 
+	protected function __construct(Database\Connection $database, $userId, 
 			$id, $tableName)
 	{
 		$this->database = $database;
-		$this->username = $username;
+		$this->userId = $userId;
 		$this->tableName = $tableName;
 		$this->table = $database->table($tableName);
 		$this->id = $id;
@@ -30,7 +29,6 @@ abstract class DataObject implements IDataObject
 	{
 		$cls = get_called_class();
 		return new $cls($database, $username);
-		echo "test";
 	}
 	
 	public static function get(Database\Connection $database, $id)
@@ -78,8 +76,8 @@ abstract class DataObject implements IDataObject
 			unset($rowArray['id']);
 			
 			// set creator and time of creation
-			$rowArray['created_by'] = $this->username;
-			$rowArray['created_at'] = (new DateTime())->getTimestamp();
+			$rowArray['created_by'] = $this->userId;
+			$rowArray['created_at'] = date("Y-m-d H:i:s");
 			
 			// insert row into db
 			$this->row = $this->table->insert($rowArray);
@@ -91,6 +89,8 @@ abstract class DataObject implements IDataObject
 		{
 			$this->row->update();	
 		}	
+		
+		return true;
 	}
 
 	public function delete() 

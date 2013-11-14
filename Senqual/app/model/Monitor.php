@@ -18,9 +18,9 @@ class Monitor extends DataObject
 	/*
 	 * Ctor
 	 */
-	protected function __construct(Database\Connection $database, $username, $id=-1)
+	protected function __construct(Database\Connection $database, $userId, $id=-1)
 	{
-		parent::__construct($database, $username, $id, 'monitors');
+		parent::__construct($database, $userId, $id, 'monitors');
 	}
 	
 	/*
