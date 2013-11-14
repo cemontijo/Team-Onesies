@@ -25,10 +25,10 @@ abstract class DataObject implements IDataObject
 		$this->load();
 	}
 	
-	public static function create(Database\Connection $database, $username)
+	public static function create(Database\Connection $database, $userId)
 	{
 		$cls = get_called_class();
-		return new $cls($database, $username);
+		return new $cls($database, $userId);
 	}
 	
 	public static function get(Database\Connection $database, $id)

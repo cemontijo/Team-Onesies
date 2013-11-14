@@ -10,6 +10,8 @@ interface IUserProfile
 	public function getName();
 	public function setAffiliation($affiliation);
 	public function getAffiliation();
+	public function setTitle($title);
+	public function getTitle();
 	public function setPhone($phone);
 	public function getPhone();
 }

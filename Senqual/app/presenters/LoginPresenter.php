@@ -1,6 +1,7 @@
 <?php
 
 use Nette\Application\UI;
+use Senqual\Model\User;
 
 
 /**
@@ -14,16 +15,10 @@ class LoginPresenter extends BasePresenter
 	public function __construct(Nette\Database\Connection $database)
 	{
 		$this->database = $database;
-		//$this->user ->database->table('user_profile') = array();
-		//$this-> users = array();
 	}
 
-	/**
-	 * Sign-in form factory.
-	 * @return Nette\Application\UI\Form
-	 */
-	protected function createComponentSignInForm()
-	{
+	public function createComponentSignInForm()
+ 	{
 		$form = new UI\Form;
 		$form->addText('username', 'Username:')
 			->setRequired('Please enter your username.');
@@ -36,63 +31,57 @@ class LoginPresenter extends BasePresenter
 		$form->addSubmit('send', 'Sign in');
 
 		// call method signInFormSucceeded() on success
-		$form->onSuccess[] = $this->signInFormSucceeded;
-		return $form;
+ 		$form->onSuccess[] = $this->signInFormSucceeded;
+ 		return $form; 		
 	}
 	
-	protected function createComponentNewUserForm()
+	public function createComponentNewUserForm()
 	{
 		$form = new UI\Form;
-		$form->addText('username', 'Username:')
+		
+		$form->addText('email', 'Email:')
+			->setRequired('Please enter your E-mail.');
+		
+		$form->addText('name', 'Name:')
 			->setRequired('Please enter your username.');
 
 		$form->addText('title', 'Title:')
 			->setRequired('Please enter your title.');
-			
+
 		$form->addText('affiliation', 'Affiliation:')
 			->setRequired('Please enter your affiliation.');
-			
-		$form->addText('email', 'Email:')
-			->setRequired('Please enter your E-mail.');
-			
+
 		$form->addPassword('password', 'Password:')
 			->setRequired('Please enter your password.');
-			
+
 		$form->addPassword('rpassword', 'rPassword:')
 			->setRequired('Please re-enter your password.');
 
 		$form->addText('phone', 'Phone:');
 			//('Please enter your phone number.');
-		
-		
+
 		$form->addCheckbox('remember', 'Keep me signed in');
 		$form->addSubmit('send', 'Submit');
-
-		// call method signInFormSucceeded() on success
+		
+		// call method newUserFormSucceeded() on success
 		$form->onSuccess[] = $this->newUserFormSucceeded;
 		return $form;
 	}
-
+	
 	public function newUserFormSucceeded($form)
 	{
 		$values = $form->getValues();
+		
+		$user = User::create($this->database, $this->user->getId());
+		
+		$user->setEmail($values['email']);
+		$user->setPassword($values['password']);
+		$user->setName($values['name']);
+		$user->setTitle($values['title']);
+		$user->setAffiliation($values['affiliation']);
+		$user->setPhone($values['phone']);
 
-		$arrayValues = array(
-			'email' => $values['email'],
-			'name' => $values['username'],
-			'title' => $values['title'],
-			'affiliation' => $values['affiliation'],
-			'password' => $values['password'],
-			'phone' => $values['phone'],
-			);
-
-		//Stores new profile in DB
-		$this->database->table('user_profile')->insert($arrayValues);
-		$this->database->table('user')->insert(array(
-			'username' => $values['email'],
-			'password' => $values['password'],
-			'role' => 1
-		));
+		$user->save();
 	}
 	
 	public function signInFormSucceeded($form)

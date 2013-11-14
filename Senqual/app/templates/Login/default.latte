@@ -51,8 +51,13 @@
 			<!-- New User Form -->
 			{form newUserForm, class => form-horizontal}
 				<fieldset>
+					<div name="form" class="input-prepend" title="Email" data-rel="tooltip">
+						<strong>E-mail Address:</strong>{input email, class => 'input-large span10', autofocus => true}
+					</div>
+					<div class="clearfix"></div>
+					
 					<div name="form" class="input-prepend" title="Name" data-rel="tooltip">
-						<strong>Name:</strong>{input username, class => 'input-large span10', autofocus => true} 
+						<strong>Name:</strong>{input name, class => 'input-large span10', autofocus => true} 
 					</div>
 					<div class="clearfix"></div>
 					
@@ -65,11 +70,6 @@
 						<strong>Affiliation:</strong>{input affiliation, class => 'input-large span10', autofocus => true}
 					</div>
 					<div class="clearfix"></div>				
-					
-					<div name="form" class="input-prepend" title="Email" data-rel="tooltip">
-						<strong>E-mail Address:</strong>{input email, class => 'input-large span10', autofocus => true}
-					</div>
-					<div class="clearfix"></div>
 
 					<div name="form" class="input-prepend" title="Password" data-rel="tooltip">
 						<strong>Password:</strong>{input password, class => 'input-large span10'}
@@ -82,7 +82,7 @@
 					
 					<div class="clearfix"></div>
 		
-							<div name="form" class="input-prepend" title="Phone" data-rel="tooltip">
+					<div name="form" class="input-prepend" title="Phone" data-rel="tooltip">
 						<strong>Phone (optional):</strong>{input phone, class => 'input-large span10'}
 					</div>
 					<div class="clearfix"></div>

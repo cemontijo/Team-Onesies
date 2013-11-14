@@ -60,6 +60,14 @@ class User extends DataObject implements IUserLogin, IUserProfile
 	public function getAffiliation() {
 		return $this->row['affiliation'];
 	}
+	
+	public function setTitle($title) {
+		$this->row['title'] = $title;
+	}
+	
+	public function getTitle() {
+		return $this->row['title'];
+	}
 
 	public function setPhone($phone) {
 		$this->row['phone'] = $phone;
