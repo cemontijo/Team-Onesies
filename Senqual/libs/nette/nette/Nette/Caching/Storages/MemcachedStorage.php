@@ -47,7 +47,7 @@ class MemcachedStorage extends Nette\Object implements Nette\Caching\IStorage
 	}
 
 
-	public function __construct($host = 'localhost', $port = 11211, $prefix = '', IJournal $journal = NULL)
+	public function __construct($host = 'http://senqual.cs.utep.edu', $port = 11211, $prefix = '', IJournal $journal = NULL)
 	{
 		if (!static::isAvailable()) {
 			throw new Nette\NotSupportedException("PHP extension 'memcache' is not loaded.");
@@ -62,7 +62,7 @@ class MemcachedStorage extends Nette\Object implements Nette\Caching\IStorage
 	}
 
 
-	public function addServer($host = 'localhost', $port = 11211, $timeout = 1)
+	public function addServer($host = 'http://senqual.cs.utep.edu', $port = 11211, $timeout = 1)
 	{
 		if ($this->memcache->addServer($host, $port, TRUE, 1, $timeout) === FALSE) {
 			$error = error_get_last();
