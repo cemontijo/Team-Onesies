@@ -16,7 +16,7 @@ common:
 			errorPresenter: Error
 
 		database:
-			dsn: 'mysql:host=http://senqual.cs.utep.edu;dbname=senqual'
+			dsn: 'mysql:host=localhost'
 			user: root
 			password:
 
