@@ -16,8 +16,8 @@ common:
 			errorPresenter: Error
 
 		database:
-			dsn: 'mysql:host=localhost'
-			user:root
+			dsn: 'mysql:host=localhost; dbname=senqual'
+			user: root
 			password:
 
 		session:
