@@ -17,7 +17,7 @@ common:
 
 		database:
 			dsn: 'mysql:host=localhost'
-			user: root
+			user:root
 			password:
 
 		session:
