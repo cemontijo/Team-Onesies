@@ -1,0 +1,164 @@
+{block breadcrumbs}
+<li>
+  <span class="divider"></span>
+  <a n:href="$presenter->action">{$presenter->name}</a>
+</li>
+
+{/block}
+
+{block content}
+
+<!-- SENSOR PAGE --> 
+
+<script src="{$basePath}/js/rules/rules.js"></script>
+
+<div class="row-fluid">
+	<div class="box span5">
+		<div class="box-header well" data-original-title>
+			<h2><i class="icon-screenshot"></i>Sensors</h2>
+		</div>
+		<div class="box-content">
+			<form>
+				<fieldset>
+					<div class="span11 pull-left">
+						<input class="span12" type="text" placeholder="Sensor Filter">
+					</div>
+					<button type="submit" class="btn"><i class="icon-search"></i></button>
+				</fieldset>
+			</form>
+			
+			<div class="pre-scrollable" data-source="#responsive">
+				<div class="list-group box-content">
+					<a href="#" class="list-group-item">Sensor 1</a>
+					<a href="#" class="list-group-item">Sensor 2</a>
+					<a href="#" class="list-group-item">Sensor 3</a>
+					<a href="#" class="list-group-item">Sensor 4</a>
+					<a href="#" class="list-group-item">Sensor 5</a>
+					<a href="#" class="list-group-item">Sensor 6</a>
+					<a href="#" class="list-group-item">Sensor 7</a>
+					<a href="#" class="list-group-item">Sensor 8</a>
+					<a href="#" class="list-group-item">Sensor 9</a>
+					<a href="#" class="list-group-item">Sensor 10</a>
+					<a href="#" class="list-group-item">Sensor 11</a>
+					<a href="#" class="list-group-item">Sensor 12</a>
+					<a href="#" class="list-group-item">Sensor 13</a>
+					<a href="#" class="list-group-item">Sensor 14</a>
+					<a href="#" class="list-group-item">Sensor 15</a>
+					<a href="#" class="list-group-item">Sensor 16</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="box span7">
+		<div class="box-header well" data-original-title>
+			<h2><i class="icon-globe"></i>Sensor Map</h2>
+		</div>
+		<div class="box-content span7">
+	
+	<!-- GOOGLE MAP -->
+
+		</div>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="box">
+		<div class="box-header well" data-original-title>
+			<h2><i class="icon-screenshot"></i>Sensor Information</h2>
+		</div>
+		<div class="box-content">
+			
+		
+		
+		
+		
+			{form sensorForm, class => form-horizontal}
+				<fieldset>
+					<div name="form" class="input-prepend" title="Name" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="50%"><strong>Identifier: </strong></td>
+								<td>{input identifier, class => 'input-large', autofocus => true}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>
+					
+					<div name="form" class="input-prepend" title="Title" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="50%"><strong>Serial Number: </strong></td>
+								<td>{input serialNo, class => 'input-large', autofocus => true}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>
+					
+					<div name="form" class="input-prepend" title="Affiliation" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="50%"><strong>Type:</strong></td>
+								<td>{input type, class => 'input-large', autofocus => true}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>				
+
+					<div name="form" class="input-prepend" title="Email" data-rel="tooltip">
+						<table>
+							<tr>
+							
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>		
+					
+					<div name="form" class="input-prepend" title="Email" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="50%"><strong>Latitude(dddmmss):</strong></td>
+								<td>{input latitude, class => 'input-large', autofocus => true}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>
+
+					<div name="form" class="input-prepend" title="Password" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="50%"><strong>Longitude:</strong></td>
+								<td>{input longitude, class => 'input-large'}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>
+		
+					<div name="form" class="input-prepend" title="Phone" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="50%"><strong>Precision/accuracy:</strong></td>
+								<td>{input precAcc, class => 'input-large'}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>
+					
+					<div name="form" class="input-prepend" title="Fields" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="50%"><strong>Fields:</strong></td>
+								
+							</tr>
+						</table>
+					</div>
+				</fieldset>
+			{/form}
+		</div>
+
+	</div>
+
+</div>
+
+
+{/block}
