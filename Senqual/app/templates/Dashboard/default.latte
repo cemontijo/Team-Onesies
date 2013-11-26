@@ -1,0 +1,374 @@
+{* Dashboard Page *}
+
+{block content}
+<h3 align="center">SenQual Dashboard</h2>
+<h3 align="center">Monitor: MonitorName</h2>
+<h3 align="center">November 2013</h2>
+{foreach $profile as $user}
+		<div class="panel-heading">
+		</div>
+		<div id="collapse{$user->id}">
+			<div class="panel-body">
+			<form class = "form-horizonal" method = "get">
+				<div input class="list-group" type = "text">
+				<input class="list-group-item" id = "name" placeholder = {$user->name} required>
+				<input class="list-group-item" id = "title" placeholder = {$user->title}>
+				<input class="list-group-item" id = "affiliation" placeholder = {$user->affiliation}>
+				<input class="list-group-item" id = "email" placeholder = {$user->email}>
+				<input class="list-group-item" id = "phone" placeholder = {$user->phone}>						
+				<input id="ArchChk" name="ArchChk" type="checkbox">Text Notifications
+                		<br>
+				<input id="NonArchChk" name="NonArchChk" type="checkbox">E-mail Notifications
+                
+				</div>
+				<button type = "submit" class = "form-horizontal" > Save Changes</button>
+			</form>
+		
+			</div>
+		</div>	
+	{/foreach}
+<div class="row-fluid">
+	<div class = "pre-scrollable" >
+	<table class="table table-striped">
+	
+		<th colspan="10" rowspan="50">		
+			<html>
+			
+				<head>
+					<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+					<script type="text/javascript">
+						google.load("visualization", "1", { packages:["corechart"] });
+						google.setOnLoadCallback(drawChart);
+						function drawChart() {
+						var data = google.visualization.arrayToDataTable([
+						[' ',' '],
+						['01:00',  100],
+						['01:15',  200],
+						['01:30',  300],
+						['01:45',  400],
+						['02:00',  500],
+						['02:15',  400],
+						['02:30',  300],
+						['02:45',  200],
+						['03:00',  50],
+						['03:15',  300],
+						['03:30',  150],
+						['03:45',  160],
+						['04:00',  245],
+						['04:15',  167],
+						['04:30',  14],
+						['04:45',  190],
+						['05:00',  345],
+						['05:15',  215],
+						['05:30',  10],
+						['05:45',  100],
+						['06:00',  450],
+						['06:15',  278],
+						['06:30',  145],
+						['06:45',  350],
+						['07:00',  250],
+						['07:15',  100],
+						['07:30',  300],
+						['07:45',  400],
+						['08:00',  500],
+						['08:15',  400],
+						['08:30',  300],
+						['08:45',  200],
+						['09:00',  50],
+						['09:15',  300],
+						['09:30',  150],
+						['09:45',  160],
+						['10:00',  245],
+						['10:15',  167],
+						['10:30',  14],
+						['10:45',  190],
+						['11:00',  345],
+						['11:15',  215],
+						['11:30',  10],
+						['11:45',  100],
+						['12:00',  450],
+						['12:15',  215],
+						['12:30',  10],
+						['12:45',  100],
+						['13:00',  50],
+						['13:15',  300],
+						['13:30',  150],
+						['13:45',  160],
+						['14:00',  245],
+						['14:15',  167],
+						['14:30',  14],
+						['14:45',  190],
+						['15:00',  345],
+						['15:15',  215],
+						['15:30',  10],
+						['15:45',  100],
+						['16:00',  450],
+						['16:15',  278],
+						['16:30',  145],
+						['16:45',  350],
+						['17:00',  250],
+						['17:15',  100],
+						['17:30',  300],
+						['17:45',  400],
+						['18:00',  500],
+						['18:15',  400],
+						['18:30',  300],
+						['18:45',  200],
+						['19:00',  50],
+						['19:15',  300],
+						['19:30',  150],
+						['19:45',  160],
+						['20:00',  245],
+						['20:15',  167],
+						['20:30',  14],
+						['20:45',  190],
+						['21:00',  345],
+						['21:15',  215],
+						['21:30',  10],
+						['21:45',  100],
+						['22:00',  450],
+						['22:15',  215],
+						['22:30',  10],
+						['22:45',  100],
+						['23:00',  50],
+						['23:15',  300],
+						['23:30',  150],
+						['23:45',  160]
+						]);
+
+						var options = {
+						title: 'Results of Monitoring',
+						 hAxis: { title: 'Time' },
+						  vAxis: { title: 'units' }
+						};
+
+						var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+						chart.draw(data, options);
+						}
+					</script>
+				</head>
+				<body>
+					<div id="chart_div" style="width: 900px; height: 500px;"></div>
+				</body>
+			</html>
+		</th>
+		<th>File:</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<tr class="tg-even">
+		<td class="tg-center tg-bf">Date</td>
+		<td class="tg-center tg-bf">Time</td>
+		<td class="tg-center tg-bf">Reading</td>
+		</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>01:00:00</td>
+		<td>0.443016</td>
+	</tr>
+	<tr class="tg-even">
+		<td>11-15-2013</td>
+		<td>02:00:00</td>
+		<td>0.4420399</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+    <tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+    <tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>	
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr class="tg-even">
+    <td></td>
+    <td></td>
+    <td></td>
+	</tr>
+</table>
+</div>
+</div>
+
+<div class="row-fluid">
+<div class = "pre-scrollable" >
+	<table class="table table-striped">
+		<th colspan="10" rowspan="50">
+						<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+			<html xmlns="http://www.w3.org/1999/xhtml">
+				<head>
+					<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+						<title>
+							Google Visualization API Sample
+						</title>
+						<script type="text/javascript" src="//www.google.com/jsapi"></script>
+						<script type="text/javascript">
+						google.load('visualization', '1', { packages: ['corechart'] } );
+						</script>
+						<script type="text/javascript">
+							function drawVisualization() {
+							// Create and populate the data table.
+							var datas = google.visualization.arrayToDataTable([
+							['x', 'Sensor', 'Sensor 1', 'Sensor 2'],
+							['A',   0.443016,       1,           0.5],
+							['B',   0.4420399,       0.5,         3],
+							['C',   0.453082,       1,           7],
+							['D',   8,       0.5,         8],
+							['E',   7,       1,           9],
+							['F',   7,       0.5,         10],
+							['M',   4,       0.5,         10]
+							]); 
+							// Create and draw the visualization.
+							new google.visualization.LineChart(document.getElementById('visualization')).
+							draw(datas, { curveType: "function",
+							width: 500, height: 400,
+							vAxis: { maxValue: 10 } }
+							);
+							}
+							google.setOnLoadCallback(drawVisualization);
+						</script>
+				</head>
+				<body style="font-family: Arial;border: 0 none;">
+					<div id="visualization" style="width: 700px; height: 600px;"></div>
+				</body>
+			</html>
+		</th>
+		<th>File:</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<tr class="tg-even">
+		<td class="tg-center tg-bf">Date</td>
+		<td class="tg-center tg-bf">Time</td>
+		<td class="tg-center tg-bf">Reading</td>
+		</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>01:00:00</td>
+		<td>0.443016</td>
+	</tr>
+	<tr class="tg-even">
+		<td>11-15-2013</td>
+		<td>02:00:00</td>
+		<td>0.4420399</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+    <tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+    <tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>	
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr>
+		<td>11-15-2013</td>
+		<td>03:00:00</td>
+		<td>0.453082</td>
+	</tr>
+	<tr class="tg-even">
+    <td></td>
+    <td></td>
+    <td></td>
+	</tr>
+</table>
+</div>
+</div>
+
+{/block content}
