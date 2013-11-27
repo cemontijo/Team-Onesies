@@ -38,7 +38,7 @@ class ProfilePresenter extends BasePresenter
 
 		$form->addText('phone', 'Phone:');
 		
-		$form->addSubmit('submit', 'test');
+		$form->addSubmit('submit', 'Submit');
 		
 		$form->onSuccess[] = $this->profileFormSucceeded;
 
