@@ -66,7 +66,7 @@ class DashboardPresenter extends BasePresenter
 	}
 	public function renderDefault()
 	{
-		$this->template->profile = $this->database->table('user_profile');
+		$this->template->data = $this->database->table('data');
 		
 		
 		
