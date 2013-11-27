@@ -28,19 +28,10 @@ class SensorPresenter extends BasePresenter
 	}
 	
 	public function renderDefault()
-	{/**
-		$monitors = $this->database->table('monitors');
-		if (!$monitors) {
-			$this->error('No monitors found');
-		}
-		
-		$rules = $this->database->table('rules');
-		if (!$rules) {
-			$this->error('No monitors found');
-		}
-		$this->template->monitors = $monitors;
-		$this->template->rules = $rules;
-	**/
+	{
+
+		$this->template->sensors = $this->sensorDatabase->table('sensors');
+
 	}
 	
 	
@@ -78,7 +69,7 @@ class SensorPresenter extends BasePresenter
 		
 		$form->addSubmit('send', 'Submit');
 
-		// call method signInFormSucceeded() on success
+		//call method signInFormSucceeded() on success
 		$form->onSuccess[] = $this->sensorFormSucceeded;
 		return $form;
 	}
@@ -98,18 +89,19 @@ class SensorPresenter extends BasePresenter
 			'latitude' => $values['latitude'],
 			'longitude' => $values['longitude'],
 			'accuracy' => $values['precAcc'],
+			'creator' => "testName",
+		);
+		
+		$arrayValues2 = array(
+			'field_name' => "test2",
+			'unit_measure' => "test2",
+			'sensor_id' => $values['identifier'],
 		);
 		
 		$this->sensorDatabase->table('sensors')->insert($arrayValues);
-		/*
-		//Stores new profile in DB
-		$this->database->table('user_profile')->insert($arrayValues);
-		$this->database->table('user')->insert(array(
-			'username' => $values['email'],
-			'password' => $values['password'],
-			'role' => 1
-		));
-		*/
+		$this->fieldsDatabase->table('fields')->insert($arrayValues2);
+		
+
 	}
 
 }
