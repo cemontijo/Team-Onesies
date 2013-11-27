@@ -3,6 +3,8 @@
 /**
  * Rules presenter.
  */
+ use Nette\Application\UI;
+ 
 class RulesPresenter extends BasePresenter
 {
 	/** @var Nette\Database\Connection */
@@ -17,6 +19,9 @@ class RulesPresenter extends BasePresenter
 	{
 		if ( !$this->getUser()->isLoggedIn() )
 			$this->redirect('Login:');
+			
+		$this->template->sensors = $this->database->table('sensors');
+
 
 		$rules = $this->database->table('rules');
 		if (!$rules)
