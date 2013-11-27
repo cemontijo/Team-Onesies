@@ -122,10 +122,12 @@
 		</div>
 		<div class="box-content">
 			<select name="left" size="1">
+			
+			<!-- INSERT SENSORS HERE -->
 				<option value="0" selected="selected">Select Sensor</option>
-				<option value="1">Registered Sensor 1</option>
-				<option value="1">Registered Sensor 2</option>
-				<option value="1">Registered Sensor 3</option>
+				{foreach $sensors as $s}
+					<option value="1">{$s->identifier}</option>
+				{/foreach}
 			</select>
 			<table class="table table-bordered">	
 				<tbody>
@@ -138,7 +140,7 @@
 				</tbody>
 			</table> 
 			<span>
-				<button name="left" type="button" class="btn btn span1"&ge;</button>
+				<button name="left" type="button" class="btn span1">=</button>
 				<button name="left" type="button" class="btn span1">&ne;</button>
 				<button name="left" type="button" class="btn span1"><</button>
 				<button name="left" type="button" class="btn span1">></button>
@@ -170,9 +172,9 @@
 		<div class="box-content">
 			<select name="right" size="1">
 				<option value="0" selected="selected">Select Sensor</option>
-				<option value="1">Registered Sensor 1</option>
-				<option value="1">Registered Sensor 2</option>
-				<option value="1">Registered Sensor 3</option>
+				{foreach $sensors as $s}
+					<option value="1">{$s->identifier}</option>
+				{/foreach}
 			</select>
 			
 			<div class="clearfix"></div>
@@ -188,7 +190,7 @@
 				</tbody>
 			</table> 
 			<span>
-				<button name="right" type="button" class="btn btn span1"&ge;</button>
+				<button name="right" type="button" class="btn span1">=</button>
 				<button name="right" type="button" class="btn span1">&ne;</button>
 				<button name="right" type="button" class="btn span1"><</button>
 				<button name="right" type="button" class="btn span1">></button>
@@ -223,9 +225,9 @@
 		<div class="box-content">
 			<select name="premise" size="1">
 				<option value="0" selected="selected">Select Sensor</option>
-				<option value="1">Registered Sensor 1</option>
-				<option value="1">Registered Sensor 2</option>
-				<option value="1">Registered Sensor 3</option>
+				{foreach $sensors as $s}
+					<option value="1">{$s->identifier}</option>
+				{/foreach}
 			</select>
 			
 			<div class="clearfix"></div>
@@ -241,7 +243,7 @@
 				</tbody>
 			</table> 
 			<span>
-				<button name="premise" type="button" class="btn btn span1"&ge;</button>
+				<button name="premise" type="button" class="btn span1">=</button>
 				<button name="premise" type="button" class="btn span1">&ne;</button>
 				<button name="premise" type="button" class="btn span1"><</button>
 				<button name="premise" type="button" class="btn span1">></button>
@@ -273,9 +275,9 @@
 		<div class="box-content">
 			<select size="1">
 				<option value="0" selected="selected">Select Sensor</option>
-				<option value="1">Registered Sensor 1</option>
-				<option value="1">Registered Sensor 2</option>
-				<option value="1">Registered Sensor 3</option>
+				{foreach $sensors as $s}
+					<option value="1">{$s->identifier}</option>
+				{/foreach}
 			</select>
 			
 			<div class="clearfix"></div>
@@ -291,7 +293,7 @@
 				</tbody>
 			</table> 
 			<span>
-				<button type="button" class="btn btn span1"&ge;</button>
+				<button type="button" class="btn span1">=</button>
 				<button type="button" class="btn span1">&ne;</button>
 				<button type="button" class="btn span1"><</button>
 				<button type="button" class="btn span1">></button>
