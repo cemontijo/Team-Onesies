@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4.1
+-- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2013 at 04:57 AM
--- Server version: 5.5.32
--- PHP Version: 5.4.19
+-- Generation Time: Nov 27, 2013 at 09:54 AM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.7
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,22 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `senqual`
 --
-CREATE DATABASE IF NOT EXISTS `senqual` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `senqual`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `fields`
---
-
-CREATE TABLE IF NOT EXISTS `fields` (
-  `field_name` char(255) NOT NULL,
-  `unit_measure` char(255) NOT NULL,
-  `sensor_id` char(255) NOT NULL,
-  PRIMARY KEY (`field_name`,`unit_measure`,`sensor_id`),
-  UNIQUE KEY `sensor_id` (`sensor_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -148,6 +132,36 @@ CREATE TABLE IF NOT EXISTS `sensors` (
   PRIMARY KEY (`identifier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `sensors`
+--
+
+INSERT INTO `sensors` (`identifier`, `serial_number`, `type`, `location`, `latitude`, `longitude`, `accuracy`, `date_modified`, `date_created`, `creator`) VALUES
+('aaa', 'aaa', 'bbb', 'ccc', '40.716558', '-73.975754', 'fff', '2013-11-27 07:55:37', '0000-00-00 00:00:00', 'aaa'),
+('testing', 'testing2', 'testing2', 'testing2', '31.977794', '-106.508331', 'testing2', '2013-11-27 07:56:00', '2013-11-13 13:21:21', 'Jaime');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sensor_fields`
+--
+
+CREATE TABLE IF NOT EXISTS `sensor_fields` (
+  `field_name` char(255) NOT NULL,
+  `unit_measure` char(255) NOT NULL,
+  `sensor_id` char(255) NOT NULL,
+  PRIMARY KEY (`field_name`,`unit_measure`,`sensor_id`),
+  UNIQUE KEY `sensor_id` (`sensor_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sensor_fields`
+--
+
+INSERT INTO `sensor_fields` (`field_name`, `unit_measure`, `sensor_id`) VALUES
+('aaa', 'aaa', 'aaa'),
+('testFar', '90', 'testing');
+
 -- --------------------------------------------------------
 
 --
@@ -205,17 +219,17 @@ INSERT INTO `user_profile` (`id`, `email`, `name`, `title`, `affiliation`, `pass
 --
 
 --
--- Constraints for table `fields`
---
-ALTER TABLE `fields`
-  ADD CONSTRAINT `fields_ibfk_1` FOREIGN KEY (`sensor_id`) REFERENCES `sensors` (`identifier`);
-
---
 -- Constraints for table `monitor_rules`
 --
 ALTER TABLE `monitor_rules`
   ADD CONSTRAINT `monitor_rules_ibfk_1` FOREIGN KEY (`monitor_id`) REFERENCES `monitors` (`id`),
   ADD CONSTRAINT `monitor_rules_ibfk_2` FOREIGN KEY (`rule_id`) REFERENCES `rules` (`id`);
+
+--
+-- Constraints for table `sensor_fields`
+--
+ALTER TABLE `sensor_fields`
+  ADD CONSTRAINT `sensor_fields_ibfk_1` FOREIGN KEY (`sensor_id`) REFERENCES `sensors` (`identifier`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
