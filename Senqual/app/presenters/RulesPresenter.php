@@ -23,7 +23,7 @@ class RulesPresenter extends BasePresenter
 			$this->error('No rules found');
 		
 		$sensorFields = $this->database->table('sensor_fields');
-		if (!$fields)
+		if (!$sensorFields)
 			$this->error('No sensor fields found');
 		
 		$this->template->rules = $rules;
