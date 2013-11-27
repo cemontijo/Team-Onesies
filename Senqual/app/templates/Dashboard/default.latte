@@ -25,9 +25,7 @@
 							var options = {
 							title: 'Results of Monitoring',
 							hAxis: { title: 'Time' },
-							vAxis: { title: 'units' }
-						     
-
+							vAxis: { title: 'fahrenheit' }
 							};
 							var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 							chart.draw(data, options);
@@ -38,11 +36,6 @@
 						<div id="chart_div" style="width: 900px; height: 500px;"></div>
 					</body>
 				</html>
-			</th>
-			<th>File:</th>
-			<th></th>
-			<th></th>
-			</tr>
 			<tr class="tg-even">
 			<td class="tg-center tg-bf">Date</td>
 			<td class="tg-center tg-bf">Time</td>
@@ -112,26 +105,36 @@
 				</body>
 			</html>
 		</th>
-		<th>File:</th>
+		<th></th>
 		<th></th>
 		<th></th>
 	</tr>
 	<tr class="tg-even">
-		<td class="tg-center tg-bf">Date</td>
-		<td class="tg-center tg-bf">Time</td>
-		<td class="tg-center tg-bf">Reading</td>
+		<td></td>
+		<td></td>
+		<td ></td>
 		</tr>
 
 	<tr>
-		<td>Add</td>
-		<td>Anomalies</td>
-		<td>Here</td>
+	<td></td>
+		<td> <a  class="list-group-item" >Anomalies</td>	
+		<td></td>
 	</tr>
-
 	<tr class="tg-even">
-    <td></td>
-    <td></td>
-    <td></td>
+			<td class="tg-center tg-bf">Date</td>
+			<td class="tg-center tg-bf">Time</td>
+			<td class="tg-center tg-bf">Reading</td>
+	</tr>
+	<tr class="tg-even">
+		<td>		
+			<a  class="list-group-item" >11-15-2013
+		</td>
+		<td>		
+			<a  class="list-group-item" >2:15
+		</td>
+		<td>		
+			<a  class="list-group-item" >110
+		</td>
 	</tr>
 </table>
 </div>
