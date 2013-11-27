@@ -7,27 +7,27 @@ class RulesPresenter extends BasePresenter
 {
 	/** @var Nette\Database\Connection */
 	private $database;
-	/**
+	
 	public function __construct(Nette\Database\Connection $database)
 	{
 		$this->database = $database;
 	}
-	**/
 	
 	public function renderDefault()
-	{/**
-		$monitors = $this->database->table('monitors');
-		if (!$monitors) {
-			$this->error('No monitors found');
-		}
-		
+	{
+		if ( !$this->getUser()->isLoggedIn() )
+			$this->redirect('Login:');
+
 		$rules = $this->database->table('rules');
-		if (!$rules) {
-			$this->error('No monitors found');
-		}
-		$this->template->monitors = $monitors;
+		if (!$rules)
+			$this->error('No rules found');
+		
+		$sensorFields = $this->database->table('sensor_fields');
+		if (!$fields)
+			$this->error('No sensor fields found');
+		
 		$this->template->rules = $rules;
-	**/
+		$this->template->fields = $sensorFields;
 	}
 
 }

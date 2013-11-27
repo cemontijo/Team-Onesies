@@ -98,15 +98,16 @@ class MonitorPresenter extends BasePresenter
 	public function renderDefault()
 	{
 		if ( !$this->getUser()->isLoggedIn() ){ $this->redirect('Login:');}
+		
 		$monitors = $this->database->table('monitors');
 		if (!$monitors) {
 			$this->error('No monitors found');
 		}
 		
 		$rules = $this->database->table('rules');
-		if (!$rules) {
+		/*if (!$rules) {
 			$this->error('No monitors found');
-		}
+		}*/
 		$this->template->monitors = $monitors;
 		$this->template->rules = $rules;
 	}
