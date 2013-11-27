@@ -9,11 +9,20 @@
 class SensorPresenter extends BasePresenter
 {
 	/** @var Nette\Database\Connection */
-private $database;
+	private $sensorDatabase;
+	private $fieldsDatabase;
+	private $database;
+	private $name;
+	private $title;
+	private $email;
+	private $password;
+	private $phone;
+	private $values;
 	
 	public function __construct(Nette\Database\Connection $database)
 	{
-		$this->database = $database;
+		$this->sensorDatabase = $database;
+		$this->fieldsDatabase = $database;
 		//$this->user ->database->table('user_profile') = array();
 		//$this-> users = array();
 	}
@@ -61,6 +70,10 @@ private $database;
 
 		$form->addText('fields', 'Fields:')
 			->setRequired('Fields');
+		
+		$form->addText('measure', 'Measure:')
+			->setRequired('Measure');
+			
 					
 		
 		$form->addSubmit('send', 'Submit');
@@ -79,14 +92,15 @@ private $database;
 
 		$arrayValues = array(
 			'identifier' => $values['identifier'],
-			'SN' => $values['serialNo'],
-			'Type' => $values['type'],
-			'Location' => $values['location'],
-			'Latitude' => $values['latitude'],
-			'Longitude' => $values['longitude'],
-			'PrecAccur' => $values['precAcc'],
+			'serial_number' => $values['serialNo'],
+			'type' => $values['type'],
+			'location' => $values['location'],
+			'latitude' => $values['latitude'],
+			'longitude' => $values['longitude'],
+			'accuracy' => $values['precAcc'],
 		);
 		
+		$this->sensorDatabase->table('sensors')->insert($arrayValues);
 		/*
 		//Stores new profile in DB
 		$this->database->table('user_profile')->insert($arrayValues);
