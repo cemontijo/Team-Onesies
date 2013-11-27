@@ -9,13 +9,14 @@
 class SensorPresenter extends BasePresenter
 {
 	/** @var Nette\Database\Connection */
-	private $database;
-	/**
+private $database;
+	
 	public function __construct(Nette\Database\Connection $database)
 	{
 		$this->database = $database;
+		//$this->user ->database->table('user_profile') = array();
+		//$this-> users = array();
 	}
-	**/
 	
 	public function renderDefault()
 	{/**
@@ -41,22 +42,26 @@ class SensorPresenter extends BasePresenter
 			->setRequired('ID');
 
 		$form->addText('serialNo', 'Serial Number:')
-			->setRequired('SN');
+			->setRequired('Serial Number');
 			
 		$form->addText('type', 'Type:')
-			->setRequired('Sensor Type.');
+			->setRequired('Sensor Type');
+			
+		$form->addText('location', 'Location:')
+			->setRequired('Location');
 			
 		$form->addText('latitude', 'Latitude:')
-			->setRequired('y coordinate');
+			->setRequired('Latitude');
 			
 		$form->addText('longitude', 'Longitude:')
-			->setRequired('x coordinate.');
+			->setRequired('Longitude');
 			
-		$form->addText('precAcc', 'Precision/accuracy::')
-			->setRequired('precision and accuracy');
+		$form->addText('precAcc', 'Precision/accuracy:')
+			->setRequired('Precision/accuracy');
 
-		
-		
+		$form->addText('fields', 'Fields:')
+			->setRequired('Fields');
+					
 		
 		$form->addSubmit('send', 'Submit');
 
@@ -64,7 +69,10 @@ class SensorPresenter extends BasePresenter
 		$form->onSuccess[] = $this->sensorFormSucceeded;
 		return $form;
 	}
-
+	
+	
+	
+	
 	public function sensorFormSucceeded($form)
 	{
 		$values = $form->getValues();
@@ -73,6 +81,7 @@ class SensorPresenter extends BasePresenter
 			'identifier' => $values['identifier'],
 			'SN' => $values['serialNo'],
 			'Type' => $values['type'],
+			'Location' => $values['location'],
 			'Latitude' => $values['latitude'],
 			'Longitude' => $values['longitude'],
 			'PrecAccur' => $values['precAcc'],

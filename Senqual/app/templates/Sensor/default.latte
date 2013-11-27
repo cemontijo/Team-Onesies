@@ -13,12 +13,10 @@
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
   
-
-
 <script>
-
 	function resetForm(){
 		document.getElementById("forms").reset();
+		document.getElementById("formsModal").reset();
 	}
 
 	function initialize() {
@@ -39,7 +37,33 @@
     }
     google.maps.event.addDomListener(window, 'load', initialize);
 	
-		
+	function activate(sensor){
+		//select all tr, and iterate through each to remove active class
+		$("tr").each(function() {
+			$(this).removeClass("active");
+		});
+   		$(sensor).addClass("active");		//selection is now active
+	}
+
+
+	/*jQuery for Filtering*/
+	$(document).ready(function() { 
+		$('#search').keyup(function(event) {
+			search('#test tr', $(this).val());  
+		});	
+	});
+
+	function search(selector, query) {  
+		query = $.trim(query); 				//trim white space  
+		query = query.replace(/ /gi, '|'); 	//add OR for regex query  
+	  
+		$(selector).each(function() {  
+			($(this).text().search(new RegExp(query, "i")) < 0) ? $(this).hide().removeClass('visible') : $(this).show().addClass('visible');  
+		});  
+	}  
+	/*jQuery for Filtering*/
+	
+	
 
 </script>
 
@@ -48,37 +72,34 @@
 	<div class="box span5">
 		<div class="box-header well" data-original-title>
 			<h2><i class="icon-screenshot"></i>Sensors</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
 		</div>
 		<div class="box-content">
-			<form>
-				<fieldset>
-					<div class="span11 pull-left">
-						<input class="span12" id="search" type="text" placeholder="Sensor Filter">
-					</div>
-					<button type="submit" class="btn"><i class="icon-search"></i></button>
-				</fieldset>
-			</form>
-			
+			<div class="box-content">
+				<button class="btn pull-left" disabled><i class="icon-search"></i></button>
+				<input class="span6" id="search" type="text" placeholder="Sensor Filter">
+				<a class="btn btn-primary" href="#myModal" role="button" data-toggle="modal">New Sensor</a>
+				<a class="btn btn-primary" onclick="test()">Edit Sensor</a>
+			</div>
 			
 			<div class="pre-scrollable" data-source="#responsive">
-				<div class="list-group box-content">				
-					<a href="#" class="list-group-item">Sensor 1</a>
-					<a href="#" class="list-group-item">Sensor 2</a>
-					<a href="#" class="list-group-item">Sensor 3</a>
-					<a href="#" class="list-group-item">Sensor 4</a>
-					<a href="#" class="list-group-item">Sensor 5</a>
-					<a href="#" class="list-group-item">Sensor 6</a>
-					<a href="#" class="list-group-item">Sensor 7</a>
-					<a href="#" class="list-group-item">Sensor 8</a>
-					<a href="#" class="list-group-item">Sensor 9</a>
-					<a href="#" class="list-group-item">Sensor 10</a>
-					<a href="#" class="list-group-item">Sensor 11</a>
-					<a href="#" class="list-group-item">Sensor 12</a>
-					<a href="#" class="list-group-item">Sensor 13</a>
-					<a href="#" class="list-group-item">Sensor 14</a>
-					<a href="#" class="list-group-item">Sensor 15</a>
-					<a href="#" class="list-group-item">Sensor 16</a>
+				<div class="box-content">
+				<!-- iterate through list of sensors from database, make sure search and activate still work -->
+					<table class="list-group" id="test" width="100%">
+					<tbody>
+						<tr id="sensorBox" class="list-group-item" onclick="activate(this)">
+							<td>thisTest 1 </td>
+						</tr>
+						<tr id="sensorBox" class="list-group-item" onclick="activate(this)">
+							<td>wtf</td>
+						</tr>
+					</tbody>
+					</table>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -86,12 +107,16 @@
 	<div class="box span7">
 		<div class="box-header well" data-original-title>
 			<h2><i class="icon-globe"></i>Sensor Map</h2>
+				<div class="box-icon">
+					<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+					<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+				</div>
 		</div>
 		<div class="box-content span7">
 	
-	<!-- GOOGLE MAP -->
+				<!-- GOOGLE MAP -->
 	
-			<div id="map_canvas" style="width:700px; height:400px">
+			<div id="map_canvas" style="width:900px; height:400px">
 			
 			</div>
 
@@ -103,11 +128,15 @@
 	<div class="box">
 		<div class="box-header well" data-original-title>
 			<h2><i class="icon-screenshot"></i>Sensor Information</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
 		</div>
 		<div class="box-content">
 			{form sensorForm, class => form-horizontal, id => 'forms'}
 				<fieldset>
-					<div name="form" class="input-prepend" title="Name" data-rel="tooltip">
+					<div name="form" class="input-prepend" title="ID" data-rel="tooltip">
 						<table>
 							<tr>
 								<td width="50%"><strong>Identifier: </strong></td>
@@ -117,7 +146,7 @@
 					</div>
 					<div class="clearfix"></div>
 					
-					<div name="form" class="input-prepend" title="Title" data-rel="tooltip">
+					<div name="form" class="input-prepend" title="Serial Number" data-rel="tooltip">
 						<table>
 							<tr>
 								<td width="50%"><strong>Serial Number: </strong></td>
@@ -127,7 +156,7 @@
 					</div>
 					<div class="clearfix"></div>
 					
-					<div name="form" class="input-prepend" title="Affiliation" data-rel="tooltip">
+					<div name="form" class="input-prepend" title="Type" data-rel="tooltip">
 						<table>
 							<tr>
 								<td width="50%"><strong>Type:</strong></td>
@@ -137,27 +166,27 @@
 					</div>
 					<div class="clearfix"></div>				
 
-					<div name="form" class="input-prepend" title="Email" data-rel="tooltip">
+					<div name="form" class="input-prepend" title="Location" data-rel="tooltip">
 						<table>
 							<tr>
 							<td width="50%"><strong>Location:</strong></td>
-							
+							<td>{input location, class => 'input-large', autofocus => true}</td>
 							</tr>
 						</table>
 					</div>
 					<div class="clearfix"></div>		
 					
-					<div name="form" class="input-prepend" title="Email" data-rel="tooltip">
+					<div name="form" class="input-prepend" title="Latitude" data-rel="tooltip">
 						<table>
 							<tr>
-								<td width="50%"><strong>Latitude(dddmmss):</strong></td>
+								<td width="50%"><strong>Latitude (dddmmss):</strong></td>
 								<td>{input latitude, class => 'input-large', autofocus => true}</td>
 							</tr>
 						</table>
 					</div>
 					<div class="clearfix"></div>
 
-					<div name="form" class="input-prepend" title="Password" data-rel="tooltip">
+					<div name="form" class="input-prepend" title="Longitude" data-rel="tooltip">
 						<table>
 							<tr>
 								<td width="50%"><strong>Longitude (dddmmss):</strong></td>
@@ -167,7 +196,7 @@
 					</div>
 					<div class="clearfix"></div>
 		
-					<div name="form" class="input-prepend" title="Phone" data-rel="tooltip">
+					<div name="form" class="input-prepend" title="Precision/accuracy" data-rel="tooltip">
 						<table>
 							<tr>
 								<td width="50%"><strong>Precision/accuracy:</strong></td>
@@ -178,26 +207,140 @@
 					<div class="clearfix"></div>
 					
 					<div name="form" class="input-prepend" title="Fields" data-rel="tooltip">
-						<table>
+						<table>						
 							<tr>
-								<td width="50%"><strong>Fields:</strong></td>
-								
+								<td width="33.3%"><strong>Fields:</strong></td>
+								<td>{input fields, class => 'input-large'}</td>
+								<td>{input fields, class => 'input-large'}</td>
+
+							</tr>
+							<tr>
+								<td width="33.3%"></td>
+								<td>{input fields, class => 'input-large'}</td>
+								<td>{input fields, class => 'input-large'}</td>
 							</tr>
 						</table>
 					</div>
-					
+					<br />
+					<br />
 					<p class="center span10">
 						{input send, class => 'btn btn-primary btn-large'}
+						<a onclick="resetForm()" class="btn btn-large">Clear</a>
 					</p>
 				</fieldset>
 			{/form}		
-			<p class="center">
-				<button onclick="resetForm()" class="btn btn-large">Clear</button>
-			</p>
+
 		</div>
-
 	</div>
+</div>
 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">New Sensor</h3>
+	</div>
+	<div class="modal-body">
+		<div class="well login-box">
+			<div class="alert alert-info">
+				Please fill out the following information.
+			</div>
+			
+			{form sensorForm, class => form-horizontal, id => 'formsModal'}
+				<fieldset>
+					<div name="form" class="input-prepend" title="ID" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="40%"><strong>Identifier: </strong></td>
+								<td>{input identifier, size => '20', class => 'input-large', autofocus => true}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>
+					
+					<div name="form" class="input-prepend" title="Serial Number" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="40%"><strong>Serial Number: </strong></td>
+								<td>{input serialNo, class => 'input-large', autofocus => true}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>
+					
+					<div name="form" class="input-prepend" title="Type" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="40%"><strong>Type:</strong></td>
+								<td>{input type, class => 'input-large', autofocus => true}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>				
+
+					<div name="form" class="input-prepend" title="Location" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="40%"><strong>Location:</strong></td>
+								<td>{input location, class => 'input-large', autofocus => true}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>		
+					
+					<div name="form" class="input-prepend" title="Latitude" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="40%"><strong>Latitude (dddmmss):</strong></td>
+								<td>{input latitude, class => 'input-large', autofocus => true}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>
+
+					<div name="form" class="input-prepend" title="Longitude" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="40%"><strong>Longitude (dddmmss):</strong></td>
+								<td>{input longitude, class => 'input-large'}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>
+		
+					<div name="form" class="input-prepend" title="Precision/accuracy" data-rel="tooltip">
+						<table>
+							<tr>
+								<td width="40%"><strong>Precision/accuracy:</strong></td>
+								<td>{input precAcc, class => 'input-large'}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>
+					
+					<div name="form" class="input-prepend" title="Fields" data-rel="tooltip">
+						<table>						
+							<tr>
+								<td width="27.3%"><strong>Fields:</strong></td>
+								<td>{input fields, class => 'input-large'}</td>
+								<td>{input fields, class => 'input-large'}</td>
+
+							</tr>
+							<tr>
+								<td width="27.3%"></td>
+								<td>{input fields, class => 'input-large'}</td>
+								<td>{input fields, class => 'input-large'}</td>
+							</tr>
+						</table>
+					</div>
+				</fieldset>
+				<p class="center span5">
+					<a onclick="resetForm()" class="btn">Clear</a>
+					{input send, class => 'btn btn-primary'}
+				</p>
+			{/form}
+		</div>
+	</div>
 </div>
 
 
