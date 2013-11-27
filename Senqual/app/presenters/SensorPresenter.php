@@ -34,6 +34,70 @@ class SensorPresenter extends BasePresenter
 
 	}
 	
+	protected function createComponentEditSensorForm()
+	{
+		$form = new UI\Form;
+		$form->addText('identifier', 'Identifier:')
+			->setRequired('ID');
+
+		$form->addText('serialNo', 'Serial Number:')
+			->setRequired('Serial Number');
+			
+		$form->addText('type', 'Type:')
+			->setRequired('Sensor Type');
+			
+		$form->addText('location', 'Location:')
+			->setRequired('Location');
+			
+		$form->addText('latitude', 'Latitude:')
+			->setRequired('Latitude');
+			
+		$form->addText('longitude', 'Longitude:')
+			->setRequired('Longitude');
+			
+		$form->addText('precAcc', 'Precision/accuracy:')
+			->setRequired('Precision/accuracy');
+
+		$form->addText('fields', 'Fields:');
+			//->setRequired('Fields');
+		
+		$form->addText('measure', 'Measure:');
+			//->setRequired('Measure');
+			
+					
+		
+		$form->addSubmit('send', 'Submit');
+
+		//call method signInFormSucceeded() on success
+		$form->onSuccess[] = $this->editSensorFormSucceeded;
+		return $form;
+	}
+	
+	
+	public function editSensorFormSucceeded($form)
+	{
+		$values = $form->getValues();
+		$this->flashMessage('Record Updated', 'success');
+		//$id = $this->user->getId();
+
+		/*
+			$id = $this->database->table('sensors')->where('identifier', $identifier);
+			?><script>alert(<?php echo $id; ?>);</script><?php
+			echo $values;
+			$id->update($values);
+			//$this->database->exec("UPDATE user SET username=?, password=? WHERE id=?", 
+				//	$values['email'], $values['password'], $id);
+		/*
+		} else {
+			$user = $this->database->table('user_profile')->insert($values);
+		}
+		*/
+	
+		$this->flashMessage('Record Updated', 'success');
+
+	}
+	
+	
 	
 	protected function createComponentSensorForm()
 	{
