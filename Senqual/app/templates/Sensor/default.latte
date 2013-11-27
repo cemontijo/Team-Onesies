@@ -62,6 +62,7 @@
 
 		{foreach $sensors as $s}
 			if(name == {$s->identifier}){
+				
 				values = [{$s->identifier}, {$s->serial_number}, {$s->type}, 
 						  {$s->location}, {$s->latitude}, {$s->longitude}, {$s->accuracy}];
 			}
@@ -175,7 +176,7 @@
 			</div>
 		</div>
 		<div class="box-content">
-			{form sensorForm, class => form-horizontal, id => 'forms'}
+			{form editSensorForm, class => form-horizontal, id => 'forms'}
 				<fieldset>
 					<div name="form" class="input-prepend" title="ID" data-rel="tooltip">
 						<table>
@@ -353,7 +354,7 @@
 						<table>
 							<tr>
 								<td width="40%"><strong>Precision/accuracy:</strong></td>
-								<td>{input precAcc, class => 'input-large'}</td>
+								<td>{input precAcc, class => 'input-large' }</td>
 							</tr>
 						</table>
 					</div>
@@ -363,14 +364,14 @@
 						<table>						
 							<tr>
 								<td width="27.3%"><strong>Fields:</strong></td>
-								<td>{input fields, class => 'input-large'}</td>
-								<td>{input fields, class => 'input-large'}</td>
+								<td>{input fields, class => 'input-large', placeholder => '<field name>'}</td>
+								<td>{input fields, class => 'input-large', placeholder => '<unit of measure>'}</td>
 
 							</tr>
 							<tr>
 								<td width="27.3%"></td>
-								<td>{input fields, class => 'input-large'}</td>
-								<td>{input fields, class => 'input-large'}</td>
+								<td>{input fields, class => 'input-large', placeholder => '<field name>'}</td>
+								<td>{input fields, class => 'input-large', placeholder => '<unit of measure>'}</td>
 							</tr>
 						</table>
 					</div>

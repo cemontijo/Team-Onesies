@@ -7,6 +7,7 @@ class MonitorPresenter extends BasePresenter
 {
 	/** @var Nette\Database\Connection */
 	private $database;
+
 	
 	public function __construct(Nette\Database\Connection $database)
 	{

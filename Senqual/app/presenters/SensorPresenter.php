@@ -9,8 +9,9 @@
 class SensorPresenter extends BasePresenter
 {
 	/** @var Nette\Database\Connection */
-	private $sensorDatabase;
-	private $fieldsDatabase;
+	//private $sensorDatabase;
+	//private $fieldsDatabase;
+
 	private $database;
 	private $name;
 	private $title;
@@ -18,11 +19,13 @@ class SensorPresenter extends BasePresenter
 	private $password;
 	private $phone;
 	private $values;
-	
+
+		
 	public function __construct(Nette\Database\Connection $database)
 	{
-		$this->sensorDatabase = $database;
-		$this->fieldsDatabase = $database;
+		$this->database = $database;
+		//$this->sensorDatabase = $database;
+		//$this->fieldsDatabase = $database;
 		//$this->user ->database->table('user_profile') = array();
 		//$this-> users = array();
 	}
@@ -30,7 +33,7 @@ class SensorPresenter extends BasePresenter
 	public function renderDefault()
 	{
 
-		$this->template->sensors = $this->sensorDatabase->table('sensors');
+		$this->template->sensors = $this->database->table('sensors');
 
 	}
 	
@@ -67,8 +70,8 @@ class SensorPresenter extends BasePresenter
 					
 		
 		$form->addSubmit('send', 'Submit');
-
 		//call method signInFormSucceeded() on success
+
 		$form->onSuccess[] = $this->editSensorFormSucceeded;
 		return $form;
 	}
@@ -76,24 +79,32 @@ class SensorPresenter extends BasePresenter
 	
 	public function editSensorFormSucceeded($form)
 	{
+		if (!$this->user->isLoggedIn()) {
+			$this->redirect("Login:");
+		}
+	
 		$values = $form->getValues();
-		$this->flashMessage('Record Updated', 'success');
-		//$id = $this->user->getId();
 
+		$sensor = $this->database->table('sensors')->where('identifier', "aaa");
+		$sensor->update($values);
+		
 		/*
-			$id = $this->database->table('sensors')->where('identifier', $identifier);
-			?><script>alert(<?php echo $id; ?>);</script><?php
-			echo $values;
-			$id->update($values);
-			//$this->database->exec("UPDATE user SET username=?, password=? WHERE id=?", 
-				//	$values['email'], $values['password'], $id);
-		/*
+		$id = $this->sensors->getId();
+		$email = $this->database->table('sensors')->get($id)->username;
+	
+		if ($email) {
+			$user = $this->database->table('user_profile')->where('email', $email);
+			$user->update($values);
+			$this->database->exec("UPDATE user SET username=?, password=? WHERE id=?", 
+					$values['email'], $values['password'], $id);
 		} else {
 			$user = $this->database->table('user_profile')->insert($values);
 		}
-		*/
 	
-		$this->flashMessage('Record Updated', 'success');
+		$this->flashMessage('User created', 'success');
+		$this->redirect('Profile:edit');
+*/
+
 
 	}
 	
@@ -126,8 +137,8 @@ class SensorPresenter extends BasePresenter
 		$form->addText('fields', 'Fields:')
 			->setRequired('Fields');
 		
-		$form->addText('measure', 'Measure:')
-			->setRequired('Measure');
+		$form->addText('measure', 'Measure:');
+			//->setRequired('Measure');
 			
 					
 		
@@ -153,7 +164,7 @@ class SensorPresenter extends BasePresenter
 			'latitude' => $values['latitude'],
 			'longitude' => $values['longitude'],
 			'accuracy' => $values['precAcc'],
-			'creator' => "testName",
+			//'creator' => "testName",
 		);
 		
 		$arrayValues2 = array(
@@ -162,9 +173,9 @@ class SensorPresenter extends BasePresenter
 			'sensor_id' => $values['identifier'],
 		);
 		
-		$this->sensorDatabase->table('sensors')->insert($arrayValues);
-		$this->fieldsDatabase->table('fields')->insert($arrayValues2);
-		
+		$this->database->table('sensors')->insert($arrayValues);
+		$this->database->table('sensor_fields')->insert($arrayValues2);
+		$this->flashMessage('Record Created', 'success');
 
 	}
 
