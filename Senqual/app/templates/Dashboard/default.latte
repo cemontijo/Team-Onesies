@@ -26,6 +26,8 @@
 							title: 'Results of Monitoring',
 							hAxis: { title: 'Time' },
 							vAxis: { title: 'units' }
+						     
+
 							};
 							var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 							chart.draw(data, options);
@@ -86,14 +88,14 @@
 							function drawVisualization() {
 							// Create and populate the data table.
 							var datas = google.visualization.arrayToDataTable([
-							['x', 'Sensor', 'Sensor 1', 'Sensor 2'],
-							['A',   0.443016,       1,           0.5],
-							['B',   0.4420399,       0.5,         3],
-							['C',   0.453082,       1,           7],
-							['D',   8,       0.5,         8],
-							['E',   7,       1,           9],
-							['F',   7,       0.5,         10],
-							['M',   4,       0.5,         10]
+							['x', 'Sensor 1', 'Sensor 2', 'Sensor 3'],
+							['1:00',   90,       92,           94],
+							['1:15',   98,       100,         99],
+							['1:30',   100,       98,           96],
+							['1:45',   95,       90,         92],
+							['2:00',   97,       100,           103],
+							['2:15',   100,       110,         105],
+							['2:30',   96,       100,         101]
 							]); 
 							// Create and draw the visualization.
 							new google.visualization.LineChart(document.getElementById('visualization')).
