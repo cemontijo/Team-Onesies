@@ -17,10 +17,25 @@
 							var data = new google.visualization.DataTable();
 							data.addColumn('string', ' ');
 							data.addColumn('number', ' ');
+							data.addColumn({ type:'string', role:'annotation' }); // annotation role col.
+							data.addColumn({ type:'string', role:'annotationText' }); // annotationText col.
+							data.addColumn({ type:'boolean',role:'certainty' }); // certainty col.
 							{foreach $data as $data_info}
+							var h = '<?php echo $data_info->reading;?>';
+								if( h<93 ||h>110)
+								{
+								
 								data.addRows([
-								['<?php echo $data_info->time;?>',<?php echo $data_info->reading;?>]
+								['<?php echo $data_info->time;?>',<?php echo $data_info->reading;?>,'A','Anomaly',true]
 								]);
+								}
+								else
+								{
+								data.addRows([
+								['<?php echo $data_info->time;?>',<?php echo $data_info->reading;?>,'','',false]
+								]);
+								}
+								
 							{/foreach}
 							var options = {
 							title: 'Results of Monitoring',
@@ -57,6 +72,9 @@
 					<a  class="list-group-item" >{$data_info->reading}
 				{/foreach}
 			</td>
+			{foreach $testR as $testRule}
+				<a  class="list-group-item" >{$testRule->rule}
+				{/foreach}
 			</tr>
 		</table>
 	</div>
@@ -126,6 +144,7 @@
 			<td class="tg-center tg-bf">Reading</td>
 	</tr>
 	<tr class="tg-even">
+		
 		<td>		
 			<a  class="list-group-item" >11-15-2013
 		</td>
@@ -135,7 +154,9 @@
 		<td>		
 			<a  class="list-group-item" >110
 		</td>
-	</tr>
+
+	
+	
 </table>
 </div>
 </div>
