@@ -5,8 +5,9 @@ public function parse($str){
 //parses the string
 $parsedStmt = sscanf($str,"%s %s %s");
 
-// show types and values
+//debug
 //print_r($parsedStmt);
+
 return($parsedStmt);
 }
 
