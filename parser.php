@@ -1,5 +1,5 @@
 <?php
-public function ($str){
+public function parse($str){
 //parses the string
 $parsedStmt = sscanf($str,"%s %s %s");
 
