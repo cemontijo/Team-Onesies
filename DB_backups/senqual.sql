@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 4.0.4.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2013 at 03:54 AM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Generation Time: Dec 05, 2013 at 10:47 AM
+-- Server version: 5.5.32
+-- PHP Version: 5.4.19
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `senqual`
 --
+CREATE DATABASE IF NOT EXISTS `senqual` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `senqual`;
 
 -- --------------------------------------------------------
 
@@ -158,17 +160,19 @@ CREATE TABLE IF NOT EXISTS `monitors` (
   `date_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `date_created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `creator` text NOT NULL,
+  `chosen` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `monitors`
 --
 
-INSERT INTO `monitors` (`id`, `name`, `date_modified`, `date_created`, `creator`) VALUES
-(1, 'my monitor 1', '2013-11-26 04:20:34', '0000-00-00 00:00:00', 'cemontijo@live.com'),
-(2, 'MyMonitor 2', '2013-11-26 04:20:16', '0000-00-00 00:00:00', 'cemontijo@live.com'),
-(3, 'my monitor 33', '2013-11-27 03:55:31', '0000-00-00 00:00:00', 'cemontijo@live.com');
+INSERT INTO `monitors` (`id`, `name`, `date_modified`, `date_created`, `creator`, `chosen`) VALUES
+(1, 'my monitor 1', '2013-11-26 04:20:34', '0000-00-00 00:00:00', 'cemontijo@live.com', 0),
+(2, 'MyMonitor 2', '2013-11-26 04:20:16', '0000-00-00 00:00:00', 'cemontijo@live.com', 0),
+(3, 'my monitor 33', '2013-11-27 03:55:31', '0000-00-00 00:00:00', 'cemontijo@live.com', 0),
+(4, 'montior 4', '2013-12-05 08:42:10', '0000-00-00 00:00:00', 'cemontijo@live.com', 0);
 
 -- --------------------------------------------------------
 
@@ -225,24 +229,6 @@ INSERT INTO `rules` (`id`, `dnl`, `rule_string`, `creator`, `date_modified`, `da
 ('rule1', 'For all readings, it is never the case that the statement "temperature > 115" is true within the duration.', 'global, null, null, absence, null, temperature > 115', 'aschweighofer@miners.utep.edu', '2013-12-03 04:44:08', '2013-09-25 23:16:03', 'global', 'absence', NULL, NULL, NULL, 'temperature > 115', 'For all readings, ', 'it is never the case that the statement "temperature > 115" is true within the duration.'),
 ('rule2', 'TestDnl2', 'n ante orci, in fringilla lorem malesuada nec. Sed quis lectus in en', 'newminer@utep.edu', '2013-12-03 04:27:49', '2013-09-25 23:17:56', 'beforeR', 'universality', '', NULL, NULL, '', 'For all readings before the statement <scope_statement1> becomes true, ', 'it is always the case that the statement <pattern_statement> is true within the duration.'),
 ('rule3', 'For all readings, it is never the case that the statement "temperature <= 93" is true within the duration.', 'global, null, null, absence, null, temperature <= 93', 'aschweighofer@miners.utep.edu', '2013-12-03 05:07:00', '2013-09-25 23:16:03', 'global', 'absence', NULL, NULL, NULL, 'temperature <= 93', 'For all readings, ', 'it is never the case that the statement "temperature <= 93" is true within the duration.');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ruletest`
---
-
-CREATE TABLE IF NOT EXISTS `ruletest` (
-  `rule` varchar(255) NOT NULL,
-  PRIMARY KEY (`rule`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ruletest`
---
-
-INSERT INTO `ruletest` (`rule`) VALUES
-('temperature>110');
 
 -- --------------------------------------------------------
 
@@ -354,7 +340,8 @@ INSERT INTO `user_profile` (`id`, `email`, `name`, `title`, `affiliation`, `pass
 -- Constraints for table `monitor_rules`
 --
 ALTER TABLE `monitor_rules`
-  ADD CONSTRAINT `monitor_rules_ibfk_1` FOREIGN KEY (`monitor_id`) REFERENCES `monitors` (`id`);
+  ADD CONSTRAINT `monitor_rules_ibfk_1` FOREIGN KEY (`monitor_id`) REFERENCES `monitors` (`id`),
+  ADD CONSTRAINT `monitor_rules_ibfk_2` FOREIGN KEY (`rule_id`) REFERENCES `rules` (`id`);
 
 --
 -- Constraints for table `sensor_fields`
