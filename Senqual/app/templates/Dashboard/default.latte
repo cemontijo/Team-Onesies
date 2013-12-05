@@ -13,6 +13,16 @@
 						<script type="text/javascript">
 							google.load("visualization", "1", { packages:["corechart"] });
 							google.setOnLoadCallback(drawChart);						
+							{foreach $testR as $testRule}
+									if('<?php echo $testRule->rule;?>'=='temperature>110')
+									{
+									var rd= '<?php echo $testRule->rule;?>';
+									}
+							{/foreach}
+							var temps = rd.match(/\d+/g);
+							var test = parseInt(temps);
+					
+							
 							function drawChart() {
 							var data = new google.visualization.DataTable();
 							data.addColumn('string', ' ');
@@ -20,10 +30,15 @@
 							data.addColumn({ type:'string', role:'annotation' }); // annotation role col.
 							data.addColumn({ type:'string', role:'annotationText' }); // annotationText col.
 							data.addColumn({ type:'boolean',role:'certainty' }); // certainty col.
+									
 							{foreach $data as $data_info}
+							
+							
 							var h = '<?php echo $data_info->reading;?>';
-								if( h<93 ||h>110)
+					
+								if( h>test)
 								{
+								
 								
 								data.addRows([
 								['<?php echo $data_info->time;?>',<?php echo $data_info->reading;?>,'A','Anomaly',true]
@@ -31,6 +46,7 @@
 								}
 								else
 								{
+								//document.write('else ' +h+ "\n");
 								data.addRows([
 								['<?php echo $data_info->time;?>',<?php echo $data_info->reading;?>,'','',false]
 								]);
@@ -72,9 +88,7 @@
 					<a  class="list-group-item" >{$data_info->reading}
 				{/foreach}
 			</td>
-			{foreach $testR as $testRule}
-				<a  class="list-group-item" >{$testRule->rule}
-				{/foreach}
+			
 			</tr>
 		</table>
 	</div>
