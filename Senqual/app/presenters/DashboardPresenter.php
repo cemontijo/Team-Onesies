@@ -68,6 +68,7 @@ class DashboardPresenter extends BasePresenter
 	{
 		$this->template->data = $this->database->table('data');
 		$this->template->testR = $this->database->table('ruleTest');
+		$this->template->rules = $this->database->table('rules');
 		
 		
 		

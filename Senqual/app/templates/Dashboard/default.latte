@@ -19,8 +19,17 @@
 									var rd= '<?php echo $testRule->rule;?>';
 									}
 							{/foreach}
+							
+							{foreach $rules as $cond}
+									if('<?php echo $cond->pattern_statement;?>'=='temperature > 115')
+									{
+									var cond= '<?php echo $cond->pattern_statement;?>';
+									}
+							{/foreach}
 							var temps = rd.match(/\d+/g);
 							var test = parseInt(temps);
+							var temps2 = cond.match(/\d+/g);
+							var intcond = parseInt(temps2);
 					
 							
 							function drawChart() {
@@ -36,7 +45,7 @@
 							
 							var h = '<?php echo $data_info->reading;?>';
 					
-								if( h>test)
+								if( h>intcond)
 								{
 								
 								
