@@ -38,7 +38,7 @@ class DashboardPresenter extends BasePresenter
 	public function renderDefault()
 	{
 		$this->template->data = $this->database->table('data');
-		$this->template->testR = $this->database->table('rules');		
+		$this->template->rules = $this->database->table('rules');		
 	}
 	
 	public function editValues()
