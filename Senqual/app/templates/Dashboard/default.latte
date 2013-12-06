@@ -14,9 +14,9 @@
 							google.load("visualization", "1", { packages:["corechart"] });
 							google.setOnLoadCallback(drawChart);						
 							{foreach $testR as $testRule}
-									if('<?php echo $testRule->rule;?>'=='temperature>110')
+									if('<?php echo $testRule->pattern_statement;?>'=='temperature > 115')
 									{
-									var rd= '<?php echo $testRule->rule;?>';
+									var rd= '<?php echo $testRule->pattern_statement;?>';
 									}
 							{/foreach}
 							var temps = rd.match(/\d+/g);
