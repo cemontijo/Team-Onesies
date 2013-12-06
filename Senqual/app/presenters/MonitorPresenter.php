@@ -7,7 +7,6 @@ class MonitorPresenter extends BasePresenter
 {
 	/** @var Nette\Database\Connection */
 	private $database;
-
 	
 	public function __construct(Nette\Database\Connection $database)
 	{
@@ -113,4 +112,12 @@ class MonitorPresenter extends BasePresenter
 		$this->template->rules = $rules;
 	}
 
-}
+	public function applyMonitor()
+	{
+		//$monitor = $this->database->table("monitor")->where("id=?",$monitorId);
+
+
+
+	}
+
+}//end MonitorPresenter.php
